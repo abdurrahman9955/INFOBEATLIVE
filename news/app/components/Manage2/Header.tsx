@@ -15,9 +15,9 @@ import Oldest from './Oldest';
 
 
 const Header = () => {
+ 
   const [MenuVisible, setMenuVisible] = useState(false);
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Books'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
+  const [selectedRoute, setSelectedRoute] = useState<string>('Books');
 
   
 

@@ -4,20 +4,21 @@ const Popular = () => {
   return (
    
    <div className='flex justify-center  font-bold  
-   border-4 border-black  bg-red-400 '>
+   border-2 border-black  bg-red-400 '>
      
-       <div className='flex flex-col w-full m-2
-        bg-white mt-5  border-4 lg:w-11/12
-      border-black -600 h-auto md:mb-16 font-bold'>
+       <div className='flex flex-col w-full m-1
+        bg-white   border-2 lg:w-11/12
+      border-black -600 h-auto sm:mb-16 font-bold'>
 
 
          <div className='   w-full  h-auto'>
-          <h1 className='flex justify-center gap-4 border-b-4 border-black  text-xl font-bold  pb-2
+          <h1 className='flex justify-center gap-1 border-b-2 border-black  text-xs 
+          font-bold  pb-1
           bg-red-400'> 
 
           
-          <button type='button' className='text-white bg-red-950 p-2 pl-6 pr-6 w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>your all latest content </button>
+          <button type='button' className='text-white bg-red-950 p-1 pl-6 pr-6 w-auto 
+          h-7  mt-1 rounded-sm  hover:bg-gray-900'>your all popular content </button>
 
          
 
@@ -25,19 +26,19 @@ const Popular = () => {
           </h1>
          
             
-          <h1 className='flex justify-center gap-4   text-xl font-bold  
-          bg-red-400 pb-2 border-b-4 border-black '> 
+          <h1 className='flex justify-center gap-1   text-xs font-bold  
+          bg-red-400 pb-1 border-b-2 border-black '> 
 
-          <button type='button' className='text-white bg-red-950 p-2 w-28 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Articles </button>
+          <button type='button' className='text-white bg-red-950 p-1 w-28 h-7  mt-1 
+          rounded-sm  hover:bg-gray-900'>Articles </button>
 
-          <button type='button' className='text-white bg-red-950 p-2 w-28 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Pdf </button>
+          <button type='button' className='text-white bg-red-950 p-1 w-28 h-7  mt-1 
+          rounded-sm  hover:bg-gray-900'>Pdf </button>
 
-          <button type='button' className='text-white bg-red-950 p-2 w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-950'>Banner </button>
+          <button type='button' className='text-white bg-red-950 px-6 w-auto h-7  mt-1
+          rounded-sm  hover:bg-gray-950'>Banner </button>
           </h1> 
-          <div className='h-screen overflow-y-auto m-2 mb-2 mx-2 p-2 border-4 border-black  '>
+          <div className='h-screen overflow-y-auto m-1 mb-1 mx-1 p-1 border-2 border-black  '>
            
 
            <h1>well come</h1>

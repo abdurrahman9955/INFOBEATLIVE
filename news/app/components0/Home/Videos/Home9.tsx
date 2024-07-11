@@ -7,42 +7,43 @@ import Videos3 from './Videos3';
 
 
 const Home9 = () => {
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Videos1'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
+ 
+  const [selectedRoute, setSelectedRoute] = useState<string>('Videos1');
 
 
   return (
-   
+  
    <div className='flex justify-center  font-bold 
-   border-4 border-black  bg-lime-400'>
+   border-2 border-black  bg-lime-400'>
      
-       <div className='flex flex-col  w-full m-2
-        bg-white  border-4 
+       <div className='flex flex-col  w-full m-1
+        bg-white  border-2 
       border-black  h-auto  font-bold'>
 
 
          <div className='   w-full  h-auto'>
-          <h1 className='flex justify-center gap-4 border-b-4 border-black  text-xl font-bold  pb-2
+          <h1 className='flex justify-center gap-2 border-b-2 border-black  text-xs
+          font-bold  pb-1
           bg-lime-400'> 
 
           <button onClick={() => setSelectedRoute('Videos1')}
-           type='button' className='text-white bg-lime-950 p-2
-           w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-950'>Popular </button>
+           type='button' className='text-white bg-lime-950 px-2
+           w-auto h-7  mt-1
+          rounded  hover:bg-gray-950'>Popular </button>
 
           <button onClick={() => setSelectedRoute('Videos2')}
-           type='button' className='text-white bg-lime-950 p-2 
-          w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Latest </button>
+           type='button' className='text-white bg-lime-950 px-2 
+          w-auto h-7  mt-1
+          rounded hover:bg-gray-900'>Latest </button>
 
           <button onClick={() => setSelectedRoute('Videos3')}
-           type='button' className='text-white bg-lime-950 p-2 
-          w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Oldest </button>
+           type='button' className='text-white bg-lime-950 px-2 
+          w-auto h-7  mt-1 
+          rounded  hover:bg-gray-900'>Oldest </button>
 
             
           </h1>
-             <div className='h-auto overflow-y-auto  p-2   '>
+             <div className='h-auto overflow-y-auto  p-1   '>
            
 
              {selectedRoute === 'Videos1' && <Videos1 />}

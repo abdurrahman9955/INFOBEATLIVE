@@ -42,20 +42,20 @@ const Connect = () => {
 
 
   return (
-    <div className='flex flex-col  py-10 bg-fuchsia-500  border-4 border-black'>
+    <div className='flex flex-col min-h-screen py-5 bg-fuchsia-500  border-2 border-black'>
         <div className="flex flex-col  ">
-        <h1 className="flex justify-center text-3xl text-black font-bold max-sm:text-xl 
-        sm:ml-10 max-sm:ml-3 ">
+        <h1 className="flex justify-center text-xl text-black font-bold max-sm:text-lg 
+        ">
            Start your Lecture Here</h1>
              <div className='flex justify-center'>
-            <h1 className='items-center text-2xl text-black border-4 m-3 border-black h-auto max-w-xl lg:max-w-5xl
-           mt-10  font-bold p-3'>
+            <h1 className='items-center text-sm text-black border-2 m-1 border-black 
+            h-auto max-w-xl lg:max-w-2xl  mt-5  font-bold p-1'>
              in this page you can connect your members and call them or voice them
              together, if you are an admin you can connect as much as people you need 
              you can make video/voice call or chat no one can access it if he/she has 
              not been invited you can create as many room as you need, means several 
              people can have difference conversation at the same time from many different
-             location and continent,
+             location and continent.
           </h1>
           </div>
          </div>
@@ -87,32 +87,32 @@ const Connect = () => {
            
 
           <div className='flex justify-center'>
-         <div className='flex flex-col lg:w-2/5  max-lg:w-2/4 max-md:w-5/6 mt-20 gap-10 font-bold 
-              border-4  border-slate-950 sm:p-10 max-sm:p-5 md:text-2xl text-xl'>
+         <div className='flex flex-col lg:w-2/5  max-lg:w-2/4 max-md:w-5/6 mt-10 gap-5
+         font-bold  border-2  border-slate-950 sm:p-5 max-sm:p-5 md:text-xs text-xs'>
 
               
               <button onClick={handleMembers}
-               type='button' className='w-full   bg-black text-white h-10
-              rounded-2xl  hover:bg-violet-950 '>connect the members</button>
+               type='button' className='w-full   bg-black text-white h-7
+              rounded-sm  hover:bg-violet-950 '>connect the members</button>
 
               
               <button onClick={handleMenuClick}
-               type='button' className='w-full   bg-black text-white h-10
-              rounded-2xl  hover:bg-violet-950'>connect the admins</button>
+               type='button' className='w-full   bg-black text-white h-7
+              rounded-sm hover:bg-violet-950'>connect the admins</button>
 
              
              <button onClick={handleView}
-             type='button' className='w-full   bg-black text-white h-10
-             rounded-2xl  hover:bg-violet-950 '>view your invited</button>
+             type='button' className='w-full   bg-black text-white h-7
+             rounded-sm  hover:bg-violet-950 '>view your invited</button>
 
             
             <button  onClick={handleConnected}
-             type='button' className='w-full   bg-black text-white h-10
-             rounded-xl hover:bg-violet-950'>members  connected</button>
+             type='button' className='w-full   bg-black text-white h-7
+             rounded-sm hover:bg-violet-950'>members  connected</button>
 
             <button  onClick={handlePrevious}
-             type='button' className='w-full   bg-black text-white h-10
-             rounded-xl hover:bg-violet-950'>previous connection</button>
+             type='button' className='w-full   bg-black text-white h-7
+             rounded-sm hover:bg-violet-950'>previous connection</button>
      </div>
      </div>
 
@@ -120,9 +120,9 @@ const Connect = () => {
 
      <div  onClick={handleStart}
       className='flex justify-center'>
-      <button type='submit' className='lg:w-1/5 max-lg:w-1/3 max-md:w-2/5  h-10
+      <button type='submit' className='lg:w-1/5 max-lg:w-1/3 max-md:w-2/5  h-7
        text-slate-50 bg-black font-bold
-      hover:bg-slate-900 rounded-xl max-sm:w-3/5 mt-10 text-2xl'>start discoursing </button>
+      hover:bg-slate-900 rounded-xl max-sm:w-3/5 mt-10 mb-10 text-xs'>start discoursing </button>
       </div>
 
            

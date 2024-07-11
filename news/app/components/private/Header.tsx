@@ -25,9 +25,9 @@ import Home from './Home';
 
 
 const Header = () => {
+ 
   const [MenuVisible, setMenuVisible] = useState(false);
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Home'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
+  const [selectedRoute, setSelectedRoute] = useState<string>('Home');
   
 
   const handleMenuClick = ()=>{

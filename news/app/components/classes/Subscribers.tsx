@@ -3,14 +3,14 @@ import React from 'react'
 
 const Subscribers = () => {
   return (
-    <div className='flex flex-col  py-32 bg-emerald-500 border-4 border-red-950'>
+    <div className='flex flex-col min-h-screen py-5 bg-emerald-500 border-2 border-red-950'>
         <div className="flex flex-col  ">
-        <h1 className="flex justify-center text-3xl font-bold max-sm:text-xl 
-         text-red-950">
+        <h1 className="flex justify-center text-xl font-bold max-sm:text-lg text-red-950">
+
             Please Apply For Admission Here </h1>
              <div className='flex justify-center'>
-            <h1 className='items-center text-xl  border-4 m-3 border-red-950 h-auto max-w-xl lg:max-w-5xl
-           mt-10  font-bold p-3 text-red-950 '>
+            <h1 className='items-center text-sm  border-2 m-1 border-red-950 h-auto 
+            max-w-xl lg:max-w-2xl mt-5  font-bold p-1 text-red-950 '>
              welcome to our class hope you will learn more and important knowledge about 
              what we offer in this class, please apply for your appropriate position,
              if your apply for beginner role you can only access the beginners course,
@@ -29,40 +29,40 @@ const Subscribers = () => {
            
           <div className='flex justify-center'>
          <Link href={{pathname:'/Class/Privacy'}}>
-             <button type='button' className='w-80 mt-20 bg-red-950 text-white h-10
-              rounded-xl font-bold hover:bg-slate-950'> Our Privacy 
+             <button type='button' className='w-80 mt-5 bg-red-950 text-white h-7
+              text-xs  rounded-sm font-bold hover:bg-slate-950'> Our Privacy 
                </button></Link></div>
 
                <div className='flex justify-center'>
          <Link href={{pathname:'/Class/Privacy'}}>
-             <button type='button' className='w-80 mt-10 bg-red-950 text-white h-10
-              rounded-xl font-bold hover:bg-slate-950'> For Instructors 
+             <button type='button' className='w-80 mt-5 bg-red-950 text-white h-7
+              text-xs  rounded-sm font-bold hover:bg-slate-950'> For Instructors 
                </button></Link></div>
 
 
           <div className='flex justify-center'>
-         <div className='flex flex-col lg:w-2/4  max-lg:w-2/4 max-md:w-5/6 mt-10 gap-10 font-bold 
-              border-4  border-red-950 sm:p-10 max-sm:p-5 '>
+         <div className='flex flex-col lg:w-2/4  max-lg:w-2/4 max-md:w-5/6 mt-5 gap-5
+         font-bold   border-2  border-red-950 sm:p-5 max-sm:p-5 '>
 
               <Link href={{pathname:'/Class/Beginner'}}>
-              <button type='button' className='w-full   bg-red-950 text-white h-10
-              rounded-2xl  hover:bg-slate-950'>Apply for Level 1</button></Link>
+              <button type='button' className='w-full  text-xs bg-red-950 text-white h-7
+              rounded-sm  hover:bg-slate-950'>Apply for Level 1</button></Link>
 
              <Link href={{pathname:'/Class/Intermediate'}}>
-             <button type='button' className='w-full   bg-red-950 text-white h-10
-              rounded-xl  hover:bg-slate-950'> Apply for Level 2 </button></Link>
+             <button type='button' className='w-full text-xs  bg-red-950 text-white h-7
+              rounded-sm  hover:bg-slate-950'> Apply for Level 2 </button></Link>
 
              <Link href={{pathname:'/Class/Advance'}}>
-             <button type='button' className='w-full   bg-red-950 text-white h-10
-             rounded-2xl  hover:bg-slate-950 '>Apply for Level 3</button></Link>
+             <button type='button' className='w-full  text-xs bg-red-950 text-white h-7
+             rounded-sm hover:bg-slate-950 '>Apply for Level 3</button></Link>
 
             <Link href={{pathname:'/Class/Admission'}}>
-             <button type='button' className='w-full   bg-red-950 text-white h-10
-             rounded-2xl  hover:bg-slate-950 '>Views Your Admission</button></Link>
+             <button type='button' className='w-full text-xs  bg-red-950 text-white h-7
+             rounded-sm  hover:bg-slate-950 '>Views Your Admission</button></Link>
 
             <Link href={{pathname:'/Class/Certificate'}}>
-             <button type='button' className='w-full   bg-red-950 text-white h-10
-             rounded-2xl  hover:bg-slate-950 '>Apply for certificate</button></Link>
+             <button type='button' className='w-full text-xs  bg-red-950 text-white h-7
+             rounded-sm  hover:bg-slate-950 '>Apply for certificate</button></Link>
 
      </div>
      </div>

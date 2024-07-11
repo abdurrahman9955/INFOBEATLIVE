@@ -38,163 +38,163 @@ import AllBlogs from "../components/All/AllBlogs";
 
 
 const Blogs = () => {
-  const initialRoute = localStorage.getItem('selectedRoute') || 'AllBlogs'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
+
+  const [selectedRoute, setSelectedRoute] = useState<string>('AllBlogs');
 
 
   return (
-    <div className="pt-24 w-full ">
-        <div className="border-4 border-indigo-900 bg-lime-400 py-5 w-full  ">
+    <div className=" w-full ">
+        <div className="border-2 border-indigo-900 bg-lime-400 py-1 w-full  ">
         <div className="flex justify-items-center overflow-x-auto  ">
                <Link href={{pathname:'/Profile'}}>
-               <button type="button" className="text-lime-100 bg-indigo-900
-                ml-3 rounded-xl h-10 w-auto p-2 sm:w-24 max-sm:mr-1 max-sm:ml-1
-                 hover:bg-neutral-800 mr-5 ">Profile</button> </Link>
+               <button type="button" className="text-lime-100 bg-purple-950
+                ml-1 rounded h-7 w-auto p-1 sm:w-24 max-sm:mr-1 max-sm:ml-1 text-xs
+                 hover:bg-indigo-900 mr-2 ">Profile</button> </Link>
                 
-                <input type="text" className="flex-1 border-2 border-slate-950  w-full
-                rounded-l-full max-sm:rounded-full h-10 pl-5 font-bold text-xl"
+                <input type="text" className="flex-1 border border-slate-950  w-full
+                rounded-l-full max-sm:rounded-full h-7 pl-5 font-bold text-xs"
                 placeholder="search for your favorite news/blogs  "  /> 
                 
                 <button type="submit" className="bg-red-900 ml-0 text-slate-200
-                rounded-r-full px-4 max-sm:hidden  ">search</button>
+                rounded-r-full px-4 max-sm:hidden text-xs h-7  ">search</button>
 
                  <Link href={{pathname: '/upload'}}>
-                 <button type="button" className="text-lime-100 bg-indigo-900
-                ml-5 rounded-xl 2 mr-3 w-auto p-2 max-sm:ml-1 max-sm:mr-1
-                hover:bg-neutral-800 sm:w-24
+                 <button type="button" className="text-lime-100 bg-purple-950
+                ml-2 rounded 2 mr-1 w-auto p-1 max-sm:ml-1 max-sm:mr-1 h-7 text-xs
+                hover:bg-indigo-900 sm:w-24
                  ">Publish</button>
                  </Link>
            </div>
            </div>
         <div>
-            <div className="flex justify-between gap-4 overflow-x-auto overscroll-auto
-             bg-yellow-400 text-lg
-             py-3 border-4 border-purple-950  " >
+            <div className="flex justify-between gap-1 overflow-x-auto overscroll-auto
+             bg-yellow-400 text-xs
+             py-1 border-2 border-purple-950  " >
              
               <button onClick={() => setSelectedRoute('AllBlogs')}
-               type="submit" className="py-2 ml-5 px-3 hover:bg-blue-800 
-               rounded-full  bg-purple-950 text-slate-50">AllBlogs</button>
+               type="submit" className="h-7 ml-1 px-3 hover:bg-blue-800 
+               rounded-sm  bg-purple-950 text-slate-50">AllBlogs</button>
 
               <button onClick={() => setSelectedRoute('Sports1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Sports</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Sports</button>
 
               <button onClick={() => setSelectedRoute('Schools1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Schools</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Schools</button>
 
               <button onClick={() => setSelectedRoute('Education1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Education</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm bg-purple-950 text-slate-50">Education</button>
 
               <button onClick={() => setSelectedRoute('Universities1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Universities</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm bg-purple-950 text-slate-50">Universities</button>
 
               <button onClick={() => setSelectedRoute('Fitness1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Fitness</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm bg-purple-950 text-slate-50">Fitness</button>
 
               <button onClick={() => setSelectedRoute('Countries1')}
-               type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Countries</button>
+               type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Countries</button>
 
               <button onClick={() => setSelectedRoute('Politics1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Politics</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm bg-purple-950 text-slate-50">Politics</button>
 
               <button onClick={() => setSelectedRoute('Leadership1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Leadership</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Leadership</button>
 
               <button onClick={() => setSelectedRoute('Billionaires1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Billionaires</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Billionaires</button>
 
               <button onClick={() => setSelectedRoute('Money1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Money</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Money</button>
 
               <button onClick={() => setSelectedRoute('Banks1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Banks</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Banks</button>
 
               <button onClick={() => setSelectedRoute('HealthCare1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Healthcare</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Healthcare</button>
 
               <button onClick={() => setSelectedRoute('Motivation1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Motivation</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Motivation</button>
 
               <button onClick={() => setSelectedRoute('Companies1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Companies</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Companies</button>
 
               <button onClick={() => setSelectedRoute('Programming1')}
-              type="submit" className="py-2 mr-5 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Programming</button>
+              type="submit" className="h-7  px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Programming</button>
             
 
               <button onClick={() => setSelectedRoute('SocialMedia1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">SocialMedia</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">SocialMedia</button>
 
               <button onClick={() => setSelectedRoute('Ceo1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Ceo</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Ceo</button>
 
               <button onClick={() => setSelectedRoute('Crypto1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Crypto</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Crypto</button>
 
               <button onClick={() => setSelectedRoute('Hospitals1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Hospitals</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Hospitals</button>
 
               <button onClick={() => setSelectedRoute('Currencies1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800
-               rounded-full  bg-purple-950 text-slate-50">Currencies</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800
+               rounded-sm  bg-purple-950 text-slate-50">Currencies</button>
 
               <button onClick={() => setSelectedRoute('Business1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Business</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm bg-purple-950 text-slate-50">Business</button>
 
               <button onClick={() => setSelectedRoute('Investing1')}
-               type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Investing</button>
+               type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Investing</button>
 
               <button onClick={() => setSelectedRoute('War1')}
-               type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">War</button>
+               type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">War</button>
 
               <button onClick={() => setSelectedRoute('Weather1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Weather</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Weather</button>
 
               <button onClick={() => setSelectedRoute('Books1')}
-               type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Books</button>
+               type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Books</button>
 
               <button onClick={() => setSelectedRoute('Celebrities1')}
-               type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Celebrities</button>
+               type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Celebrities</button>
 
               <button onClick={() => setSelectedRoute('Economics1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Economics</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Economics</button>
 
               <button onClick={() => setSelectedRoute('Resources1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-900
-               rounded-full  bg-purple-950 text-slate-50">Resources</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-900
+               rounded-sm bg-purple-950 text-slate-50">Resources</button>
 
               <button onClick={() => setSelectedRoute('Religion1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 
-              rounded-full  bg-purple-950 text-slate-50">Religions</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 
+              rounded-sm  bg-purple-950 text-slate-50">Religions</button>
 
               <button onClick={() => setSelectedRoute('Others1')}
-              type="submit" className="py-2 px-3 hover:bg-blue-800 mr-5
-              rounded-full  bg-purple-950 text-slate-50">Others</button>
+              type="submit" className="h-7 px-3 hover:bg-blue-800 mr-1
+              rounded-sm  bg-purple-950 text-slate-50">Others</button>
             
             </div>
           </div>

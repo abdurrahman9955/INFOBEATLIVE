@@ -2,12 +2,11 @@ import Link from "next/link"
 
 const Menu = () => {
   return (
-    <nav className="fixed top-16 left-0 px-10  shadow-md z-10 bg-slate-950 
-    border-4 border-slate-300  overflow-y-auto text-2xl">
+    <nav className="fixed top-10 left-0 px-3  shadow-md z-10 bg-slate-950 
+    border-2 border-slate-300  overflow-y-auto text-sm">
         <div className="flex flex-row te " >
                 <div className=" overflow-y-auto ">
-                <ul className="flex flex-col gap-4  p-2 " >
-
+                <ul className="flex flex-col gap-1  p-2 " >
 
                  <li ><Link href={{pathname:'/'}}><p>Home</p></Link></li>
                  <li ><Link href={{pathname:'/upload'}}><p>Upload</p></Link></li>

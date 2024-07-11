@@ -13,9 +13,9 @@ import Latest from './Latest';
 import Oldest from './Oldest';
 
 const Header = () => {
+ 
   const [MenuVisible, setMenuVisible] = useState(false);
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Articles1'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
+  const [selectedRoute, setSelectedRoute] = useState<string>('Articles1');
 
   
 

@@ -10,31 +10,31 @@ const Voice = () => {
       h-auto'>
 
         <div className='flex justify-center overflow-x-auto
-        border-b-4 border-black p-2 '>
-         
+        border-b-2 border-black pt-1 '>
+        
 
          <div>
-            <button className='text-xl text-orange-950 w-20 h-10
-            ml-10  rounded-xl'><MdAddCall  className='
-            h-10 w-10  hover:text-blue-950'/></button>
+            <button className='text-sm text-orange-950 w-20 h-7
+            ml-10  rounded-sm'><MdAddCall  className='
+            h-7 w-10  hover:text-blue-950'/></button>
           </div>
 
           <div>
-            <button className='text-xl text-orange-950 w-20 h-10 
-              rounded-xl'><BsMicMuteFill  className='
-            h-10 w-10  hover:text-blue-950'/></button>
+            <button className='text-sm text-orange-950 w-20 h-7
+              rounded-sm'><BsMicMuteFill  className='
+            h-7 w-10  hover:text-blue-950'/></button>
           </div>
 
           <div>
-            <button className='text-xl text-orange-950 w-20 h-10
-                rounded-xl'><FaVolumeUp  className='
-            h-10 w-10  hover:text-blue-950'/></button>
+            <button className='text-sm text-orange-950 w-20 h-7
+                rounded-sm'><FaVolumeUp  className='
+            h-7 w-10  hover:text-blue-950'/></button>
           </div>
 
           <div>
-            <button className='text-xl text-orange-950 w-20 h-10 
-              rounded-xl'><FcEndCall  className='
-            h-10 w-10  hover:text-blue-950'/></button>
+            <button className='text-sm text-orange-950 w-20 h-7 
+              rounded-sm'><FcEndCall  className='
+            h-7 w-10  hover:text-blue-950'/></button>
           </div>
 
 
@@ -43,10 +43,10 @@ const Voice = () => {
 
        <div className='flex justify-center flex-wrap   
        h-screen
-        overflow-y-auto p-3 gap-4 max-md:m-3 '>
+        overflow-y-auto p-1 gap-2 max-md:m-1 '>
         
         <div>
-            <h1 className='text-3xl font-bold'>no content upload yet</h1>
+            <h1 className='text-sm font-bold'>no content upload yet</h1>
         </div>
         
        

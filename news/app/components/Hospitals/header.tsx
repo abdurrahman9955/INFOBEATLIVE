@@ -13,7 +13,7 @@ const Header = () => {
                 <input type="text" className="flex-1 border-2 border-slate-950  px-28
                 rounded-l-full  max-sm:px-5 max-sm:rounded-r-full   max-[450]:px-3 "
                 placeholder="search for your favorite news  "  /> 
-                
+               
                 <button type="submit" className="bg-red-800 ml-0 text-slate-200
                 rounded-r-full px-4 max-sm:hidden  ">search</button>
 

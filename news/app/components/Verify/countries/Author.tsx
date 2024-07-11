@@ -14,6 +14,7 @@ interface CountryOption {
   }
   
   interface CountrySelectProps {
+    //@ts-ignore
     onSelect: (option: ValueType<CountryOption, false, ActionMeta<CountryOption>>) => void;
   }
   
@@ -32,6 +33,7 @@ interface CountryOption {
       <Select
         options={countryOptions}
         placeholder="Select Your Country"
+        //@ts-ignore
         onChange={(option: ValueType<CountryOption, false, ActionMeta<CountryOption>>) => onSelect(option)}
         components={{ Option: CustomOption }} // This is to customize the appearance of each option
       />

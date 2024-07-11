@@ -6,17 +6,15 @@ import Link from "next/link"
 
 
 const Admission = () => {
-   
-
 
   return (
-    <div className='flex flex-col w-full h-auto pt-10 bg-yellow-400 border-4 border-black 
+    <div className='flex flex-col w-full h-auto pt-5 bg-yellow-400 border-2 border-black 
      '>
-      <div className="flex justify-center  text-3xl text-black font-bold"> <h1>
+      <div className="flex justify-center  text-xl text-black font-bold"> <h1>
         crate your channel here </h1></div>
 
-      <div className="flex justify-center text-xl text-black font-bold mt-5 mb-10 ">
-         <h1 className="max-w-2xl border-4 border-black h-auto p-2 m-3">
+      <div className="flex justify-center text-sm text-black font-bold mt-5 mb-10 ">
+         <h1 className="max-w-2xl border-2 border-black h-auto p-1 m-1">
         this channel will be available for every body in this platform, once you create it 
         you can upload video or short-video and audio or songs only, and you can monetize 
         your content if  you fullfil the requirements, please create your 
@@ -31,15 +29,15 @@ const Admission = () => {
         </h1></div>
       
         <div className='flex justify-center'>
-         <input type='text' className='lg:w-1/3 max-lg:w-2/4 max-sm:w-3/4 h-12 p-2 mt-5 
-          border-4 border-slate-950  text-xl  bg-white
+         <input type='text' className='lg:w-1/3 max-lg:w-2/4 max-sm:w-3/4 h-7 p-1 mt-5 
+          border border-slate-950  text-xs bg-white
           '
          placeholder='your channel name'  />
       </div>
 
       <div className='flex justify-center'>
-         <input type='email' className='lg:w-1/3 max-lg:w-2/4 max-sm:w-3/4 h-12 p-2 mt-5
-          border-4 border-slate-950  text-xl bg-white
+         <input type='email' className='lg:w-1/3 max-lg:w-2/4 max-sm:w-3/4 h-7 p-1 mt-5
+          border border-slate-950  text-xs bg-white
           '
          placeholder='your channel type'  />
       </div>

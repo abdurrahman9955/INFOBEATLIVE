@@ -25,10 +25,10 @@ const Header = () => {
 
 
   return (
-    <div className='py-24 '>
+    <div className=' '>
 
       <div className='flex flex-row sm:justify-between  bg-yellow-500 w-full h-20 
-      border-4 border-red-950
+      border-2 border-red-950
       overflow-x-auto sm:gap-5' >
         
        

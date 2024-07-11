@@ -6,42 +6,42 @@ import Live2 from './Live2';
 import Live3 from './Live3';
 
 const Home10 = () => {
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Live1'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
-
+  
+  const [selectedRoute, setSelectedRoute] = useState<string>('Live1');
 
   return (
    
    <div className='flex justify-center  font-bold 
-   border-4 border-black  bg-lime-400'>
+   border-2 border-black  bg-lime-400'>
      
-       <div className='flex flex-col  w-full m-2
-        bg-white  border-4 
+       <div className='flex flex-col  w-full m-1
+        bg-white  border-2
       border-black  h-auto  font-bold'>
 
 
          <div className='   w-full  h-auto'>
-          <h1 className='flex justify-center gap-4 border-b-4 border-black  text-xl font-bold  pb-2
+          <h1 className='flex justify-center gap-2 border-b-2 border-black  text-xs
+          font-bold  pb-1
           bg-lime-400'> 
 
           <button onClick={() => setSelectedRoute('Live1')}
-           type='button' className='text-white bg-lime-950 p-2
-           w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Popular </button>
+           type='button' className='text-white bg-lime-950 px-2
+           w-auto h-7  mt-1
+          rounded  hover:bg-gray-900'>Popular </button>
 
           <button onClick={() => setSelectedRoute('Live2')}
-           type='button' className='text-white bg-lime-950 p-2
-           w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-950'>Latest </button>
+           type='button' className='text-white bg-lime-950 px-2
+           w-auto h-7  mt-1
+          rounded  hover:bg-gray-950'>Latest </button>
 
           <button onClick={() => setSelectedRoute('Live3')}
-           type='button' className='text-white bg-lime-950 p-2 
-          w-auto h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Oldest </button>
+           type='button' className='text-white bg-lime-950 px-2 
+          w-auto h-7  mt-1
+          rounded  hover:bg-gray-900'>Oldest </button>
 
             
           </h1>
-             <div className='h-auto overflow-y-auto  p-2   '>
+             <div className='h-auto overflow-y-auto  p-1   '>
            
 
              {selectedRoute === 'Live1' && <Live1 />}

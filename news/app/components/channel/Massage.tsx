@@ -8,50 +8,51 @@ import Connect from './Connect';
 
 
 const Massage = () => {
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Followers'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
+  
+  const [selectedRoute, setSelectedRoute] = useState<string>('Followers');
 
   return (
-   
-   <div className='flex justify-center  font-bold pt-32  bg-yellow-500
+  
+   <div className='flex justify-center  font-bold sm:pt-5 bg-yellow-500
    '>
-     
+    
        <div className='flex flex-col md:w-3/4 max-md:w-full
-        bg-white mt-5  border-4 m-2
-      border-black -600 h-auto mb-20 font-bold'>
+        bg-white mt  border-2 m-1
+      border-black -600 h-auto sm:mb-20 font-bold'>
 
 
-      <div className=' h-20 w-full  flex justify-between border-4 border-black pb-2 
+      <div className=' h-10 w-full  flex justify-between border-2 border-black pb-1 
       '>
             <button  onClick={() => setSelectedRoute('Followers')}
-            type='button' className='text-white bg-yellow-700 pt-2 w-40 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900 ml-2 text-2xl font-bold'>Subscribers </button>
+            type='button' className='text-white bg-yellow-700  w-40 h-7  mt-1 
+          rounded-sm  hover:bg-gray-900 ml-2 text-lg font-bold'>Subscribers </button>
 
           <button  onClick={() => setSelectedRoute('Connect')}
-          type='button' className='text-white bg-yellow-700 pt-2 w-40 h-10  mt-2 
-          rounded-xl hover:bg-gray-900 mr-2 text-2xl font-bold
+          type='button' className='text-white bg-yellow-700  w-40 h-7  mt-1
+          rounded-sm hover:bg-gray-900 mr-2 text-lg font-bold
           '>Connect  </button>
            </div>
 
          <div className='   w-full  h-auto'>
-          <h1 className='flex justify-center gap-4 border-b-4 border-black  text-xl font-bold  pb-2
+          <h1 className='flex justify-center gap-2 border-b-2 border-black 
+           text-sm font-bold  pb-1
           '> 
           <button  onClick={() => setSelectedRoute('Voice')}
-          type='button' className='text-white bg-yellow-800 pt-2 w-20 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Voice </button>
+          type='button' className='text-white bg-yellow-800 pt-2 w-20 h-7  mt-1
+          rounded-sm  hover:bg-gray-900'>Voice </button>
 
           <button onClick={() => setSelectedRoute('Video')}
-           type='button' className='text-white bg-yellow-800 pt-2 w-20 h-10  mt-2 
-          rounded-xl  hover:bg-gray-950'>video </button>
+           type='button' className='text-white bg-yellow-800 pt-2 w-20 h-7  mt-1 
+          rounded-sm  hover:bg-gray-950'>video </button>
 
           <button  onClick={() => setSelectedRoute('Chat')}
-          type='button' className='text-white bg-yellow-800 pt-2 w-20 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>chat </button>
+          type='button' className='text-white bg-yellow-800 pt-2 w-20 h-7  mt-1 
+          rounded-sm  hover:bg-gray-900'>chat </button>
             
           </h1>
-          <h1 className='flex justify-center text-xl font-bold '>now there (0) participant</h1>
-          <div className='h-auto overflow-y-auto  m-2  border-4 border-black  '>
-           
+          <h1 className='flex justify-center text-xs font-bold '>now there (0) participant</h1>
+          <div className='h-auto overflow-y-auto  m-1  border-2 border-black  '>
+          
 
            {selectedRoute === 'Video' && <Video />}
            {selectedRoute === 'Followers' && <Followers />}

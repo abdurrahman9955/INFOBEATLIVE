@@ -5,7 +5,7 @@ const Level4 = () => {
    
     <div className='flex justify-center  font-bold  '>
     <div className='flex flex-col w-full 
-       bg-white mt-5  h-auto  font-bold'>
+       bg-white h-auto  font-bold'>
 
 
         <div className='   w-full  h-auto'>
@@ -13,8 +13,8 @@ const Level4 = () => {
        <div className='flex flex-wrap h-screen overflow-y-auto  '>
           
 
-       <h1 className='text-4xl '>no any videos upload here</h1>
-       
+       <h1 className='text-sm'>no any videos upload here</h1>
+      
           </div>
 
          

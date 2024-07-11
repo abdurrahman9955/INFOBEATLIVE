@@ -17,13 +17,13 @@ const Navbar = () => {
        };
  
   return (
-    <div className="fixed w-full " >
+    <div className=" w-full " >
      
-      <div className="bg-slate-900 py-5 border-4 border-red-200  ">
+      <div className="bg-slate-900 h-10 border-2 border-red-200  ">
         <div className=" flex justify-normal  ">
           
           
-          <div className="text-slate-50  py-2 px-3  ml-1 text-2xl "> 
+          <div className="text-slate-50  py-1 px-3  ml- text-2xl "> 
             <button 
              onClick={handleMenuClick}> 
                {MenuVisible ? (
@@ -41,28 +41,26 @@ const Navbar = () => {
             </div>
 
             <Link href={{pathname: '/'}} className="flex-1">
-             <h1 className="text-3xl text-yellow-500 flex-1  max-sm:text-xl mt-1
+             <h1 className="text-xl text-yellow-500 flex-1  max-sm:text-lg mt-1
               ">INFOBEATLIVE</h1>
               </Link>
 
             <div className=" mr-2 ">
               <Link href={{pathname: '/Sign_up'}}>
-               <button type="button" className="bg-blue-900 py-2  px-6
-               rounded-full text-slate-50 mr-2  hover:bg-slate-600 
-               border-2 border-slate-300 " >sign up</button> </Link>
+               <button type="button" className="bg-slate-900 h-7 mt-1  px-6
+               rounded-lg text-slate-50 text-xs  hover:bg-slate-600 
+               border border-slate-300 sm:mr-1 " >sign up</button> </Link>
 
                <Link href={{pathname: '/Sign_in'}}>
-               <button type="button" className="bg-blue-900 py-2  px-6
-               rounded-full text-slate-50 mr-5  hover:bg-slate-600 
-               border-2 border-slate-300 max-sm:hidden " 
+               <button type="button" className="bg-slate-900 h-7 mt-1  px-6
+               rounded-lg text-slate-50 text-xs hover:bg-slate-600 
+               border border-slate-300 max-sm:hidden " 
                 >sign in</button> </Link>
              
       </div> 
-     </div>
-             
-              
-      </div>
-      </div>
+     </div>           
+    </div>
+  </div>
     
   )
 }

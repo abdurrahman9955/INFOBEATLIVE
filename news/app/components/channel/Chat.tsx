@@ -11,57 +11,51 @@ const Chat = () => {
      bg-white'>
      
        <div className='flex flex-col w-full
-        bg-white   
-      h-auto  font-bold'>
+        bg-white    h-auto  font-bold'>
 
 
          <div className='   w-full  h-auto'>
-          <h1 className='flex justify-center gap-4 border-b-4 border-black  text-xl font-bold  pb-2
+          <h1 className='flex justify-center gap-2 border-b-2 border-black  
+          text-xs font-bold  pb-1
           '> 
-          <button type='button' className='text-white bg-yellow-700 pt-2 w-20 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Calls </button>
+          <button type='button' className='text-white bg-yellow-700 pt-1 w-20 h-7  mt-1 
+          rounded-sm  hover:bg-gray-900'>Calls </button>
 
-          <button type='button' className='text-white bg-yellow-700 pt-2 w-20 h-10  mt-2 
-          rounded-xl  hover:bg-gray-950'>videos </button>
+          <button type='button' className='text-white bg-yellow-700 pt-1 w-20 h-7  mt-1
+          rounded-sm  hover:bg-gray-950'>videos </button>
 
-          <button type='button' className='text-white bg-yellow-700 pt-2 w-20 h-10  mt-2 
-          rounded-xl  hover:bg-gray-900'>Chats </button>
+          <button type='button' className='text-white bg-yellow-700 pt-1 w-20 h-7  mt-1
+          rounded-sm  hover:bg-gray-900'>Chats </button>
 
-          <button type='button' className='text-white bg-yellow-700 pt-2 w-20 h-10  mt-2 
-          rounded-xl hover:bg-gray-900
+          <button type='button' className='text-white bg-yellow-700 pt-1 w-20 h-7  mt-1 
+          rounded-sm hover:bg-gray-900
           '>New  </button>
             
           </h1>
          
-          <div className='h-screen overflow-y-auto    p-2  '>
-           
-        
-        
-       
-          
+          <div className='h-screen overflow-y-auto    p-1  '> 
            
            </div>
 
            <div className='flex  flex-row'>
-           <div className='flex flex-row overflow-hidden w-5/6 mb-2 rounded-full border-4  border-black h-16 
-          ml-10 max-sm:ml-5 text-xl bg-yellow-100'>
+           <div className='flex flex-row overflow-hidden w-11/12 mb-2 rounded-full border-2
+             border-black h-10
+          ml-2 max-sm:ml-1 text-sm bg-yellow-100'>
 
-            <MdEmojiEmotions className="h-10 w-10 text-yellow-600 mt-2 ml-3"/>
+            <MdEmojiEmotions className="h-7 w-10 text-yellow-600 mt-1 ml-2"/>
 
-          <textarea  className=' h-12 w-3/5 ml-2 mt-1 p-1 rounded-full pl-5
-          border-2 border-black focus:outline ' />
+          <textarea  className=' h-7 w-3/5 ml-2 mt-1 p-1 rounded-full pl-5
+          border border-black focus:outline ' />
 
-           <IoDuplicate className="lg:ml-40 xl:ml-60 h-10 lg:mr-10 w-10 text-yellow-950 mt-2 ml-3"/>
-           <FaCamera className=" h-10 w-10 mr-3 ml-3 text-yellow-950 mt-2 "/>
+           <IoDuplicate className="lg:ml-40 xl:ml-60 h-7 mt-1 lg:mr-10 w-10 text-yellow-950 
+            ml-5"/>
+           <FaCamera className=" h-7 w-10 mr-3 ml-3 text-yellow-950 mt-1 "/>
           
           </div> 
 
-           <MdKeyboardVoice className=" h-16 w-16 mr-3 ml-3 text-yellow-950 
+           <MdKeyboardVoice className=" h-10 w-16 mr-1 ml-1 text-yellow-950 
            hover:h-20 hover:w-20 hover:mb-2"/> 
            </div>
-                  
-        
-          
                   
          </div>
          </div>

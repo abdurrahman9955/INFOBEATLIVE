@@ -35,9 +35,8 @@ import Shorts from './Shorts';
 
 const Home = () => {
   const [MenuVisible, setMenuVisible] = useState(false);
-  const initialRoute = localStorage.getItem('selectedRoute') || 'Program'
-  const [selectedRoute, setSelectedRoute] = useState<string>(initialRoute);
-  
+  const [selectedRoute, setSelectedRoute] = useState<string>('Program');
+ 
 
   const handleMenuClick = ()=>{
     setMenuVisible(!MenuVisible);
