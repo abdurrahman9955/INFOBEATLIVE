@@ -1,15 +1,15 @@
 
 import { Router } from 'express';
 import ClassController from './icon';
-import upload from './multer';
+import { upload } from './multer';
 import { authenticate } from '../../group/createGroup/authMiddleware';
 
-const router = Router();
+const classIconRouter = Router();
 
-router.post('/:classId/icon',authenticate, upload.single('icon'), ClassController.updateIcon);
+classIconRouter.post('/:classId/icon',authenticate, upload.single('icon'), ClassController.updateIcon);
 
-router.delete('/:classId/icon',authenticate, ClassController.deleteIcon);
+classIconRouter.delete('/:classId/icon',authenticate, ClassController.deleteIcon);
 
-router.get('/:classId/icon',authenticate, ClassController.getIcon);
+classIconRouter.get('/:classId/icon',authenticate, ClassController.getIcon);
 
-export default router;
+export default classIconRouter;

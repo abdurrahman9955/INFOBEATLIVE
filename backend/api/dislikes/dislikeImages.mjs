@@ -16,7 +16,7 @@ dislikeImages.post('/images/:productId', async (req, res) => {
         productId: parseInt(productId),
       },
     });
-    
+   
     if (existingDislike) {
         await prisma.like.delete({
           where: {

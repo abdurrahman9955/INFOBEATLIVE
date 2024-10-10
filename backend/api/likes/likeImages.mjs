@@ -16,7 +16,7 @@ likeImages.post('/images/:productId', async (req, res) => {
           productId: parseInt(productId),
         },
       });
- 
+
       if (existingLike) {
         await prisma.like.delete({
           where: {
@@ -60,6 +60,6 @@ likeImages.post('/images/:productId', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while getting like count' });
     }
   });
-  
+ 
 export default likeImages;
 

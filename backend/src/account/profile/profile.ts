@@ -108,6 +108,8 @@ const handleFileUpload = async (req: Request, res: Response<UploadResponse>): Pr
 };
 
 const profileRoutes = express.Router();
+
+
 profileRoutes.post('/upload/:userId', handleFileUpload);
 
 

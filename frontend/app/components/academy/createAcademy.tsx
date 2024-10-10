@@ -32,14 +32,14 @@ const CreateAcademy = () => {
         <div className='flex justify-center'>
          <input type='text' className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-1 h-8 p-1 mt-5 
           border-2 border-slate-950   bg-white rounded-lg'
-          placeholder='your group name'  />
+          placeholder='your academy name'  />
         </div>
 
       <div className='flex justify-center'>
          <input type='text' className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-1 h-8 p-1 mt-5 
          border-2 border-slate-950  text-sm   bg-white rounded-lg
            '
-         placeholder='purpose of your group'  />
+         placeholder='purpose of your academy'  />
       </div>
 
       <div className='flex justify-center'>
@@ -59,14 +59,14 @@ const CreateAcademy = () => {
          <textarea className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-40 p-1 mt-5
            border-2 border-slate-950 text-sm     bg-white rounded-xl
           '
-         placeholder='rules of your group '  />
+         placeholder='rules of your academy '  />
       </div>
 
       <div className='flex justify-center'>
          <textarea className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-60 p-1 mt-5
            border-2 border-slate-950 text-sm      bg-white rounded-xl
           '
-         placeholder='write the description about your group '  />
+         placeholder='write the description about your academy '  />
       </div>
        
       <Link href={{pathname:'/academy'}}>  

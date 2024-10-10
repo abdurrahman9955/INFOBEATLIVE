@@ -63,8 +63,6 @@ model User {
   classmediaUploads      ClassMediaUpload[]
   classtextPosts         ClassTextPost[]
   lectureParticipants    LectureParticipant[]
-  courseSections         CourseSection[]
-  courseVideos           CourseVideo[]
   classChats             ClassChat[]
   classVoiceCalls        ClassVoiceCall[]
   classVideoCalls        ClassVideoCall[]
@@ -76,9 +74,6 @@ model User {
   course                 Course[]
   lecture                Lecture[]
   exclusive              Exclusive[]
-  exclusiveVideo         ExclusiveVideo[]
-  exclusiveSection       ExclusiveSection[]
-  bootcampCourseSection  BootcampCourseSection[]
   bootcamp               Bootcamp[]
   bootcampClass          BootcampClass[]
   bootcampInstructor     BootcampInstructor[]
@@ -96,7 +91,6 @@ model User {
   bootcampLectureVoiceCall BootcampLectureVoiceCall[]
   bootcampLectureChat    BootcampLectureChat[]
   bootcampCourse         BootcampCourse[]
-  bootcampCourseVideo    BootcampCourseVideo[]
   academy                Academy[]
   academyClass           AcademyClass[]
   academyInstructor      AcademyInstructor[]
@@ -114,8 +108,6 @@ model User {
   academyLectureVoiceCall AcademyLectureVoiceCall[]
   academyLectureChat     AcademyLectureChat[]
   academyCourse          AcademyCourse[]
-  academyCourseSection   AcademyCourseSection[]
-  academyCourseVideo     AcademyCourseVideo[]
   academyVideoCall       AcademyVideoCall[]
   academyVideoCallParticipant AcademyVideoCallParticipant[]
   bootcampVideoCall      BootcampVideoCall[]
@@ -126,8 +118,45 @@ model User {
   videoCalling           VideoCalling[]
   chatting               Chatting[]
   post                   Post[]
-  
- 
+  bootcampTextPost       BootcampTextPost[]
+  bootcampMediaUpload    BootcampMediaUpload[]
+  academyMediaUpload     AcademyMediaUpload[]
+  acdemyTextPost         AcdemyTextPost[]
+  bootcampFeedback       BootcampFeedback[]
+  bootcampContact        BootcampContact[]
+  academyFeedback        AcademyFeedback[]
+  academyContact         AcademyContact[]
+  bootcampClassFeedback  BootcampClassFeedback[]
+  bootcampClassContact   BootcampClassContact[]
+  academyClassFeedback   AcademyClassFeedback[]
+  academyClassContact    AcademyClassContact[]
+  classFeedback          ClassFeedback[]
+  classContact           ClassContact[]
+  courseSection          CourseSection[]
+  courseMedia            CourseMedia[]
+  bootcampCourseSection  BootcampCourseSection[]
+  bootcampCourseVideo    BootcampCourseVideo[]
+  academyCourseSection   AcademyCourseSection[]
+  academyCourseVideo     AcademyCourseVideo[]
+  exclusiveSection       ExclusiveSection[]
+  exclusiveVideo         ExclusiveVideo[]
+  classAnnouncement      ClassAnnouncement[]
+  bootcampAnnouncement   BootcampAnnouncement[]
+  academyAnnouncement    AcademyAnnouncement[]
+  academyClassAnnouncement AcademyClassAnnouncement[]
+  bootcampClassAnnouncement BootcampClassAnnouncement[]
+  bootcampHomeText       BootcampHomeText[]
+  bootcampPriceText      BootcampPriceText[]
+  academyHomeText        AcademyHomeText[]
+  academyPriceText       AcademyPriceText[]
+  classPriceText         ClassPriceText[]
+  subComment             SubComment[]
+  likeComment            LikeComment[]
+  dislikeComment         DislikeComment[]
+  likeSubComment         LikeSubComment[]
+  dislikeSubComment      DislikeSubComment[]
+
+  @@index([email])
 } 
 
 model Account {
@@ -180,6 +209,9 @@ model Post {
   updatedAt   DateTime  @updatedAt
 
   user        User      @relation(fields: [userId], references: [id])
+  comment     Comment[]
+  like        Like[]
+  dislike     Dislike[]
 }
 
 enum PostType {
@@ -187,7 +219,6 @@ enum PostType {
   IMAGE
   TEXT
 }
-
 
 model VideoCalling {
   id          String     @id @default(cuid())
@@ -259,7 +290,7 @@ model Group {
   purpose       String
   rules         String
   description   String
-  icon          String
+  icon          String?
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   createdBy     String          
@@ -307,7 +338,7 @@ model MediaUpload {
   userId       String
   title        String
   description  String
-  type         GroupMediaType
+  type         MediaType
   contentUrl   String
   thumbnailUrl String?  
   createdAt    DateTime @default(now())
@@ -336,7 +367,7 @@ model GroupChat {
   groupId    String
   userId     String
   content    String
-  type       GroupChatMessageType
+  type       ChatMessageType
   fileUrl    String?  
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -351,6 +382,7 @@ model VoiceCall {
   userId     String
   startedAt  DateTime
   endedAt    DateTime?
+  link       String
   participants VoiceCallParticipant[]
 
   group      Group      @relation(fields: [groupId], references: [id])
@@ -374,6 +406,7 @@ model VideoCall {
   userId     String
   startedAt  DateTime
   endedAt    DateTime?
+  link       String
   participants VideoCallParticipant[]
 
   group      Group      @relation(fields: [groupId], references: [id])
@@ -453,7 +486,7 @@ model ProgramChat {
   programId  String
   userId     String
   content    String
-  type       ProgramChatMessageType
+  type       ChatMessageType
   fileUrl    String?     
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
@@ -468,7 +501,7 @@ model Class {
   purpose     String
   rules       String
   description String
-  icon        String
+  icon        String?
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   createdBy   String          
@@ -483,6 +516,93 @@ model Class {
   lectures    Lecture[]
   course      Course[]
   exclusive   Exclusive[]
+  classFeedback ClassFeedback[]
+  classContact ClassContact[]
+  classAnnouncement ClassAnnouncement[]
+  classPriceText         ClassPriceText[]
+}
+
+model ClassPriceText {
+  id                   String      @id @default(cuid())
+  classId              String
+  userId               String
+  title                String?
+  text                 String?
+  leaning1             String?
+  leaning2             String?
+  leaning3             String?
+  leaning4             String?
+  leaning5             String?
+  leaning6             String?
+  leaning7             String?
+  leaning8             String?
+  leaning9             String?
+  leaning10            String?
+  leaning11            String?
+  leaning12            String?
+  leaning13            String?
+  leaning14            String?
+  leaning15            String?
+  leaning16            String?
+  leaning17            String?
+  leaning18            String?
+  leaning19            String?
+  leaning20            String?
+  leaning21            String?
+  leaning22            String?
+  leaning23            String?
+  leaning24            String?
+  leaning25            String?
+  leaning26            String?
+  leaning27            String?
+  leaning28            String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  class                Class    @relation(fields: [classId], references: [id])
+  user                 User     @relation(fields: [userId], references: [id])
+}
+
+model ClassAnnouncement {
+  id        String      @id @default(cuid())
+  classId   String
+  userId    String
+  title     String
+  startDate DateTime
+  endDate   DateTime
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   Class    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+
+model ClassFeedback {
+  id        String      @id @default(cuid())
+  classId   String
+  userId    String
+  name      String
+  reason    String
+  statement String
+  rating    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   Class    @relation(fields: [classId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model ClassContact {
+  id        String      @id @default(cuid())
+  classId   String
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   Class    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model Instructor {
@@ -516,7 +636,7 @@ model ClassMediaUpload {
   id           String   @id @default(cuid())
   classId      String
   userId       String
-  type         ClassMediaType
+  type         MediaType
   contentUrl   String
   thumbnailUrl String?  
   createdAt    DateTime @default(now())
@@ -544,7 +664,7 @@ model ClassChat {
   classId    String
   userId     String
   content    String
-  type       ClassChatMessageType
+  type       ChatMessageType
   fileUrl    String?  
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -661,7 +781,7 @@ model LectureChat {
   lectureId  String
   userId     String
   content    String
-  type       LectureChatMessageType
+  type       ChatMessageType
   fileUrl    String?     
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
@@ -671,54 +791,59 @@ model LectureChat {
 }
 
 model Course {
-  id          String     @id @default(cuid())
+  id          String           @id @default(cuid())
   classId     String
   instructorId String
   title       String
   description String
   thumbnailUrl String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  class       Class      @relation(fields: [classId], references: [id])
-  instructor  User       @relation(fields: [instructorId], references: [id])
+  category    String
+  tags        String[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  class       Class            @relation(fields: [classId], references: [id])
+  instructor  User             @relation(fields: [instructorId], references: [id])
   sections    CourseSection[]
 }
 
 model CourseSection {
-  id        String    @id @default(cuid())
-  userId    String
-  courseId  String
-  title     String
-  order     Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-
-  course    Course   @relation(fields: [courseId], references: [id])
-  user      User        @relation(fields: [userId], references: [id])
-  videos    CourseVideo[]
+  id           String        @id @default(cuid())
+  courseId     String
+  instructorId String
+  title        String
+  category     String
+  description  String
+  thumbnailUrl String
+  tags         String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  course       Course        @relation(fields: [courseId], references: [id])
+  instructor   User             @relation(fields: [instructorId], references: [id])
+  media        CourseMedia[]
 }
 
-model CourseVideo {
-  id        String   @id @default(cuid())
-  userId    String
+model CourseMedia {
+  id        String       @id @default(cuid())
   sectionId String
+  instructorId String
   title     String
+  type      MediaTypeCourse    // Enum for video, pdf, etc.
   url       String
-  order     Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  instructor  User             @relation(fields: [instructorId], references: [id])
   section   CourseSection @relation(fields: [sectionId], references: [id])
-  user      User        @relation(fields: [userId], references: [id])
 }
 
 model Exclusive {
-  id          String     @id @default(cuid())
+  id          String           @id @default(cuid())
   classId     String
   instructorId String
   title       String
   description String
   thumbnailUrl String
+  category    String
+  tags        String[]
   createdAt    DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   class           Class      @relation(fields: [classId], references: [id])
@@ -727,33 +852,35 @@ model Exclusive {
 }
 
 model ExclusiveSection {
-  id              String    @id @default(cuid())
-  userId     String
-  courseId  String
+  id            String    @id @default(cuid())
+  courseId      String
   title         String
-  order     Int
+  instructorId  String
+  description   String
+  thumbnailUrl  String
+  category      String
+  tags          String[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
   course    Exclusive   @relation(fields: [courseId], references: [id])
-  user         User        @relation(fields: [userId], references: [id])
-  videos    ExclusiveVideo[]
+  instructor  User       @relation(fields: [instructorId], references: [id])
+  media    ExclusiveVideo[]
 }
 
 model ExclusiveVideo {
-  id             String   @id @default(cuid())
-  userId    String
-  sectionId String
+  id            String   @id @default(cuid())
+  sectionId     String
+  instructorId String
   title         String
   url           String
-  order     Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  type          MediaTypeCourse  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  instructor  User       @relation(fields: [instructorId], references: [id])
   section   ExclusiveSection @relation(fields: [sectionId], references: [id])
-  user      User        @relation(fields: [userId], references: [id])
 }
-
 
 model Bootcamp {
   id          String   @id @default(cuid())
@@ -763,7 +890,7 @@ model Bootcamp {
   language    String
   rules       String
   description String
-  icon        String
+  icon        String?
   creatorId   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -771,18 +898,137 @@ model Bootcamp {
   creator     User     @relation(fields: [creatorId], references: [id])
   classes     BootcampClass[]
   bootcampVideoCall BootcampVideoCall[]
-  
+  bootcampTextPost BootcampTextPost[]
+  bootcampMediaUpload BootcampMediaUpload[]
+  bootcampFeedback BootcampFeedback[]
+  bootcampContact BootcampContact[]
+  bootcampAnnouncement   BootcampAnnouncement[]
+  bootcampText BootcampHomeText[]
+  bootcampPriceText BootcampPriceText[]
 }
+
+model BootcampHomeText {
+  id                     String      @id @default(cuid())
+  bootcampId             String
+  userId                 String
+  homeTitile             String?
+  homeDescription        String?
+  intructorExperience    String?
+  provenExperience       String?
+  achievement            String?
+  story                  String?
+  bootCampLearning       String?
+  beginnerLearning       String?
+  intermediateLearning   String?
+  advanceLearning        String?
+  facebook               String?
+  linkedIn               String?
+  youtube                String?
+  email                  String?
+  phoneNumber            String?
+  bootcampDetailsTitle   String?
+  bootcampDetailsText    String?
+  priceTitile            String?
+  priceText              String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  bootcamp               Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user                   User     @relation(fields: [userId], references: [id])
+}
+
+model BootcampPriceText {
+  id                   String      @id @default(cuid())
+  bootcampId           String
+  userId               String
+  leaning1             String?
+  leaning2             String?
+  leaning3             String?
+  leaning4             String?
+  leaning5             String?
+  leaning6             String?
+  leaning7             String?
+  leaning8             String?
+  leaning9             String?
+  leaning10            String?
+  leaning11            String?
+  leaning12            String?
+  leaning13            String?
+  leaning14            String?
+  leaning15            String?
+  leaning16            String?
+  leaning17            String?
+  leaning18            String?
+  leaning19            String?
+  leaning20            String?
+  leaning21            String?
+  leaning22            String?
+  leaning23            String?
+  leaning24            String?
+  leaning25            String?
+  leaning26            String?
+  leaning27            String?
+  leaning28            String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  bootcamp             Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user                 User     @relation(fields: [userId], references: [id])
+}
+
+
+model BootcampAnnouncement {
+  id        String      @id @default(cuid())
+  bootcampId String
+  userId    String
+  title     String
+  startDate DateTime
+  endDate   DateTime
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model BootcampMediaUpload {
+  id           String   @id @default(cuid())
+  bootcampId      String
+  userId       String
+  title        String
+  description  String
+  type         MediaType
+  contentUrl   String
+  thumbnailUrl String?  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bootcamp   Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model BootcampTextPost {
+  id         String   @id @default(cuid())
+  bootcampId String
+  userId     String
+  title      String
+  content    String
+  imageUrls  String[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  bootcamp   Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
 
 model BootcampVideoCall {
   id         String     @id @default(cuid())
-  bootCampId    String
+  bootcampId    String
   userId     String
   startedAt  DateTime
   endedAt    DateTime?
   participants BootcampVideoCallParticipant[]
 
-  class      Bootcamp      @relation(fields: [bootCampId], references: [id],onDelete: Cascade)
+  class      Bootcamp      @relation(fields: [bootcampId], references: [id],onDelete: Cascade)
   user       User       @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
 
@@ -797,13 +1043,41 @@ model BootcampVideoCallParticipant {
   @@unique([callId, userId])
 }
 
+model BootcampContact {
+  id        String      @id @default(cuid())
+  bootcampId String
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model BootcampFeedback {
+  id        String    @id @default(cuid())
+  bootcampId String
+  userId    String
+  name      String
+  reason    String
+  statement String
+  rating    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   Bootcamp    @relation(fields: [bootcampId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
 model BootcampClass {
   id          String          @id @default(cuid())
   name        String
   purpose     String
   rules       String
   description String
-  icon        String
+  icon        String?
   bootcampId  String          // Add this to associate with Bootcamp
   level       ClassLevel      // Add this to differentiate Beginner, Intermediate, Advanced
   createdAt   DateTime        @default(now())
@@ -820,13 +1094,63 @@ model BootcampClass {
   videoCalls  BootcampClassVideoCall[]
   lectures    BootcampLecture[]
   course      BootcampCourse[]
+  bootcampClassFeedback       BootcampClassFeedback[]
+  bootcampClassContact        BootcampClassContact[]
+  bootcampClassAnnouncement BootcampClassAnnouncement[]
+  @@index([bootcampId])
+  @@index([createdBy])
 
+}
+
+model BootcampClassAnnouncement {
+  id        String      @id @default(cuid())
+  classId   String
+  userId    String
+  title     String
+  startDate DateTime
+  endDate   DateTime
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   BootcampClass    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model BootcampClassFeedback {
+  id        String      @id @default(cuid())
+  classId   String
+  level     ClassLevel 
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   BootcampClass    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model BootcampClassContact {
+  id        String      @id @default(cuid())
+  classId String
+  level     ClassLevel 
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bootcamp   BootcampClass    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model BootcampInstructor {
   id        String   @id @default(cuid())
   userId    String
   classId   String
+  level     ClassLevel 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -840,6 +1164,7 @@ model BootcampStudent {
   id        String   @id @default(cuid())
   userId    String
   classId   String
+  level     ClassLevel 
   joinedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
   isBlocked Boolean  @default(false)
@@ -854,9 +1179,10 @@ model BootcampClassMediaUpload {
   id           String   @id @default(cuid())
   classId      String
   userId       String
-  type         BootcampClassMediaType
+  type         MediaType
   contentUrl   String
   thumbnailUrl String?  
+  level        ClassLevel 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -865,25 +1191,35 @@ model BootcampClassMediaUpload {
 }
 
 model BootcampClassTextPost {
-  id         String   @id @default(cuid())
+  id         String        @id @default(cuid())
   classId    String
   userId     String
   content    String
   imageUrls  String[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  level      ClassLevel
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 
-  class      BootcampClass    @relation(fields: [classId], references: [id],onDelete: Cascade)
-  user       User     @relation(fields: [userId], references: [id],onDelete: Cascade)
+  // Relations
+  class      BootcampClass @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([classId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([level, classId])  // Compound index for queries filtering by level and class
 }
+
 
 model BootcampClassChat {
   id         String   @id @default(cuid())
   classId    String
   userId     String
   content    String
-  type       BootcampClassChatMessageType
+  type       ChatMessageType
   fileUrl    String?  
+  level      ClassLevel 
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -897,6 +1233,7 @@ model BootcampClassVoiceCall {
   userId     String
   startedAt  DateTime
   endedAt    DateTime?
+  level      ClassLevel 
   participants BootcampClassVoiceCallParticipant[]
 
   class      BootcampClass      @relation(fields: [classId], references: [id],onDelete: Cascade)
@@ -907,7 +1244,7 @@ model BootcampClassVoiceCallParticipant {
   id        String   @id @default(cuid())
   callId    String
   userId    String
-
+  level     ClassLevel 
   call      BootcampClassVoiceCall @relation(fields: [callId], references: [id],onDelete: Cascade)
   user      User           @relation(fields: [userId], references: [id],onDelete: Cascade)
 
@@ -921,7 +1258,7 @@ model BootcampClassVideoCall {
   startedAt  DateTime
   endedAt    DateTime?
   participants BootcampClassVideoCallParticipant[]
-
+  level      ClassLevel  
   class      BootcampClass      @relation(fields: [classId], references: [id],onDelete: Cascade)
   user       User       @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
@@ -930,7 +1267,7 @@ model BootcampClassVideoCallParticipant {
   id        String   @id @default(cuid())
   callId    String
   userId    String
-
+  level     ClassLevel 
   call      BootcampClassVideoCall @relation(fields: [callId], references: [id],onDelete: Cascade)
   user      User           @relation(fields: [userId], references: [id],onDelete: Cascade)
 
@@ -948,6 +1285,7 @@ model BootcampLecture {
   startTime   DateTime
   description String
   link        String
+  level       ClassLevel 
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   class       BootcampClass       @relation(fields: [classId], references: [id],onDelete: Cascade)
@@ -962,6 +1300,7 @@ model BootcampLectureParticipant {
   id          String   @id @default(cuid())
   lectureId   String
   userId      String
+  level       ClassLevel 
   joinedAt    DateTime @default(now())
 
   lecture     BootcampLecture  @relation(fields: [lectureId], references: [id],onDelete: Cascade)
@@ -977,7 +1316,7 @@ model BootcampLectureVideoCall {
   startedAt  DateTime
   endedAt    DateTime?
   link       String
-
+  level       ClassLevel 
   lecture    BootcampLecture   @relation(fields: [lectureId], references: [id],onDelete: Cascade)
   user       User      @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
@@ -989,7 +1328,7 @@ model BootcampLectureVoiceCall {
   startedAt  DateTime
   endedAt    DateTime?
   link       String
-
+  level       ClassLevel 
   lecture    BootcampLecture   @relation(fields: [lectureId], references: [id],onDelete: Cascade)
   user       User      @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
@@ -999,8 +1338,9 @@ model BootcampLectureChat {
   lectureId  String
   userId     String
   content    String
-  type       BootcampLectureChatMessageType
-  fileUrl    String?     
+  type       ChatMessageType
+  fileUrl    String?   
+  level       ClassLevel   
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 
@@ -1009,12 +1349,15 @@ model BootcampLectureChat {
 }
 
 model BootcampCourse {
-  id          String     @id @default(cuid())
+  id          String           @id @default(cuid())
   classId     String
   instructorId String
   title       String
   description String
   thumbnailUrl String
+  category    String
+  tags        String[]
+  level       ClassLevel 
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   class       BootcampClass     @relation(fields: [classId], references: [id],onDelete: Cascade)
@@ -1023,32 +1366,35 @@ model BootcampCourse {
 }
 
 model BootcampCourseSection {
-  id        String    @id @default(cuid())
-  userId    String
-  courseId  String
-  title     String
-  order     Int
+  id           String    @id @default(cuid())
+  courseId     String
+  instructorId String
+  title        String
+  category     String
+  description  String
+  thumbnailUrl String
+  tags         String[]
+  level        ClassLevel 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-
   course    BootcampCourse   @relation(fields: [courseId], references: [id],onDelete: Cascade)
-  user      User        @relation(fields: [userId], references: [id],onDelete: Cascade)
-  videos    BootcampCourseVideo[]
+  instructor  User       @relation(fields: [instructorId], references: [id],onDelete: Cascade)
+  media    BootcampCourseVideo[]
 }
-
 model BootcampCourseVideo {
   id        String   @id @default(cuid())
-  userId    String
   sectionId String
+  instructorId String
   title     String
   url       String
-  order     Int
+  type      MediaTypeCourse 
+  level     ClassLevel 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  instructor  User       @relation(fields: [instructorId], references: [id],onDelete: Cascade)
   section   BootcampCourseSection @relation(fields: [sectionId], references: [id],onDelete: Cascade)
-  user      User        @relation(fields: [userId], references: [id],onDelete: Cascade)
-}
+ 
+  }
 
 enum ClassLevel {
   BEGINNER
@@ -1064,15 +1410,163 @@ model Academy {
   language    String
   rules       String
   description String
-  icon        String
+  icon        String?
   creatorId   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
-  creator     User     @relation(fields: [creatorId], references: [id])
-  classes     AcademyClass[]
-  academyVideoCall AcademyVideoCall[]
+  creator                User     @relation(fields: [creatorId], references: [id])
+  classes                AcademyClass[]
+  academyVideoCall       AcademyVideoCall[]
+  academyMediaUpload     AcademyMediaUpload[]
+  acdemyTextPost         AcdemyTextPost[]
+  academyFeedback        AcademyFeedback[]
+  academyContact         AcademyContact[]
+  academyAnnouncement    AcademyAnnouncement[]
+  academyHomeText        AcademyHomeText[]
+  academyPriceText       AcademyPriceText[]
 }
+
+model AcademyHomeText {
+  id                     String      @id @default(cuid())
+  academyId              String
+  userId                 String
+  homeTitile             String?
+  homeDescription        String?
+  intructorExperience    String?
+  provenExperience       String?
+  achievement            String?
+  story                  String?
+  academyLearning        String?
+  beginnerLearning       String?
+  intermediateLearning   String?
+  advanceLearning        String?
+  facebook               String?
+  linkedIn               String?
+  youtube                String?
+  email                  String?
+  phoneNumber            String?
+  academyDetailsTitle    String?
+  academyDetailsText     String?
+  priceTitile            String?
+  priceText              String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  academy                Academy    @relation(fields: [academyId], references: [id])
+  user                   User     @relation(fields: [userId], references: [id])
+}
+
+model AcademyPriceText {
+  id                   String      @id @default(cuid())
+  academyId            String
+  userId               String
+  leaning1             String?
+  leaning2             String?
+  leaning3             String?
+  leaning4             String?
+  leaning5             String?
+  leaning6             String?
+  leaning7             String?
+  leaning8             String?
+  leaning9             String?
+  leaning10            String?
+  leaning11            String?
+  leaning12            String?
+  leaning13            String?
+  leaning14            String?
+  leaning15            String?
+  leaning16            String?
+  leaning17            String?
+  leaning18            String?
+  leaning19            String?
+  leaning20            String?
+  leaning21            String?
+  leaning22            String?
+  leaning23            String?
+  leaning24            String?
+  leaning25            String?
+  leaning26            String?
+  leaning27            String?
+  leaning28            String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  academy              Academy    @relation(fields: [academyId], references: [id])
+  user                 User     @relation(fields: [userId], references: [id])
+}
+
+model AcademyAnnouncement {
+  id        String      @id @default(cuid())
+  academyId String
+  userId    String
+  title     String
+  startDate DateTime
+  endDate   DateTime
+  statement String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy    Academy    @relation(fields: [academyId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model AcademyFeedback {
+  id        String      @id @default(cuid())
+  academyId String
+  userId    String
+  name      String
+  reason    String
+  statement String
+  rating    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   Academy    @relation(fields: [academyId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model AcademyContact {
+  id        String      @id @default(cuid())
+  academyId String
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   Academy    @relation(fields: [academyId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+
+model AcademyMediaUpload {
+  id           String   @id @default(cuid())
+  academyId      String
+  userId       String
+  title        String
+  description  String
+  type         MediaType
+  contentUrl   String
+  thumbnailUrl String?  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  academy      Academy    @relation(fields: [academyId], references: [id])
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model AcdemyTextPost {
+  id         String   @id @default(cuid())
+  academyId    String
+  userId     String
+  title      String
+  content    String
+  imageUrls  String[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  academy   Academy    @relation(fields: [academyId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
 
 model AcademyVideoCall {
   id         String     @id @default(cuid())
@@ -1103,7 +1597,7 @@ model AcademyClass {
   purpose     String
   rules       String
   description String
-  icon        String
+  icon        String?
   bootcampId  String          // Add this to associate with Bootcamp
   level       AcademyClassLevel      // Add this to differentiate Beginner, Intermediate, Advanced
   createdAt   DateTime        @default(now())
@@ -1120,13 +1614,63 @@ model AcademyClass {
   videoCalls  AcademyClassVideoCall[]
   lectures    AcademyLecture[]
   course      AcademyCourse[]
+  academyClassFeedback AcademyClassFeedback[]
+  academyClassContact AcademyClassContact[]
+  academyClassAnnouncement AcademyClassAnnouncement[]
 
 }
+
+model AcademyClassAnnouncement {
+  id        String      @id @default(cuid())
+  classId   String
+  userId    String
+  title     String
+  startDate DateTime
+  endDate   DateTime
+  statement String
+  level     ClassLevel 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy    AcademyClass    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model AcademyClassFeedback {
+  id        String      @id @default(cuid())
+  classId   String
+  level     AcademyClassLevel 
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   AcademyClass    @relation(fields: [classId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model AcademyClassContact {
+  id        String      @id @default(cuid())
+  classId   String
+  level     AcademyClassLevel  
+  userId    String
+  name      String
+  email     String
+  reason    String
+  statement String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   AcademyClass    @relation(fields: [classId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
 
 model AcademyInstructor {
   id        String   @id @default(cuid())
   userId    String
   classId   String
+  level     AcademyClassLevel 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -1140,6 +1684,7 @@ model AcademyStudent {
   id        String   @id @default(cuid())
   userId    String
   classId   String
+  level     AcademyClassLevel 
   joinedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
   isBlocked Boolean  @default(false)
@@ -1154,7 +1699,8 @@ model AcademyClassMediaUpload {
   id           String   @id @default(cuid())
   classId      String
   userId       String
-  type         AcademyClassMediaType
+  level        AcademyClassLevel 
+  type         ChatMessageType
   contentUrl   String
   thumbnailUrl String?  
   createdAt    DateTime @default(now())
@@ -1167,6 +1713,7 @@ model AcademyClassMediaUpload {
 model AcademyClassTextPost {
   id         String   @id @default(cuid())
   classId    String
+  level      AcademyClassLevel 
   userId     String
   content    String
   imageUrls  String[]
@@ -1182,7 +1729,8 @@ model AcademyClassChat {
   classId    String
   userId     String
   content    String
-  type       AcademyClassChatMessageType
+  level      AcademyClassLevel
+  type       ChatMessageType
   fileUrl    String?  
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -1195,6 +1743,7 @@ model AcademyClassVoiceCall {
   id         String     @id @default(cuid())
   classId    String
   userId     String
+  level      AcademyClassLevel
   startedAt  DateTime
   endedAt    DateTime?
   participants AcademyClassVoiceCallParticipant[]
@@ -1207,7 +1756,7 @@ model AcademyClassVoiceCallParticipant {
   id        String   @id @default(cuid())
   callId    String
   userId    String
-
+  level      AcademyClassLevel
   call      AcademyClassVoiceCall @relation(fields: [callId], references: [id],onDelete: Cascade)
   user      User           @relation(fields: [userId], references: [id],onDelete: Cascade)
 
@@ -1218,6 +1767,7 @@ model AcademyClassVideoCall {
   id         String     @id @default(cuid())
   classId    String
   userId     String
+  level      AcademyClassLevel
   startedAt  DateTime
   endedAt    DateTime?
   participants AcademyClassVideoCallParticipant[]
@@ -1230,7 +1780,7 @@ model AcademyClassVideoCallParticipant {
   id        String   @id @default(cuid())
   callId    String
   userId    String
-
+  level      AcademyClassLevel
   call      AcademyClassVideoCall @relation(fields: [callId], references: [id],onDelete: Cascade)
   user      User           @relation(fields: [userId], references: [id],onDelete: Cascade)
 
@@ -1244,6 +1794,7 @@ model AcademyLecture {
   title       String
   type        String
   participantLimit Int
+  level       AcademyClassLevel
   startDate   DateTime
   startTime   DateTime
   description String
@@ -1263,7 +1814,7 @@ model AcademyLectureParticipant {
   lectureId   String
   userId      String
   joinedAt    DateTime @default(now())
-
+  level      AcademyClassLevel
   lecture     AcademyLecture  @relation(fields: [lectureId], references: [id],onDelete: Cascade)
   user        User     @relation(fields: [userId], references: [id],onDelete: Cascade)
 
@@ -1277,7 +1828,7 @@ model AcademyLectureVideoCall {
   startedAt  DateTime
   endedAt    DateTime?
   link       String
-
+  level      AcademyClassLevel
   lecture    AcademyLecture   @relation(fields: [lectureId], references: [id],onDelete: Cascade)
   user       User      @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
@@ -1289,7 +1840,7 @@ model AcademyLectureVoiceCall {
   startedAt  DateTime
   endedAt    DateTime?
   link       String
-
+  level      AcademyClassLevel
   lecture    AcademyLecture   @relation(fields: [lectureId], references: [id],onDelete: Cascade)
   user       User      @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
@@ -1299,56 +1850,62 @@ model AcademyLectureChat {
   lectureId  String
   userId     String
   content    String
-  type       AcademyLectureChatMessageType
+  type       ChatMessageType
   fileUrl    String?     
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-
+  level      AcademyClassLevel
   lecture    AcademyLecture     @relation(fields: [lectureId], references: [id],onDelete: Cascade)
   user       User        @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
 
 model AcademyCourse {
-  id          String     @id @default(cuid())
-  classId     String
+  id           String           @id @default(cuid())
+  classId      String
   instructorId String
-  title       String
-  description String
+  title        String
+  description  String
   thumbnailUrl String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  class       AcademyClass     @relation(fields: [classId], references: [id],onDelete: Cascade)
-  instructor  User       @relation(fields: [instructorId], references: [id],onDelete: Cascade)
-  sections    AcademyCourseSection[]
+  category     String
+  tags         String[]
+  level        AcademyClassLevel
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  class        AcademyClass     @relation(fields: [classId], references: [id],onDelete: Cascade)
+  instructor   User       @relation(fields: [instructorId], references: [id],onDelete: Cascade)
+  sections     AcademyCourseSection[]
 }
 
 model AcademyCourseSection {
-  id        String    @id @default(cuid())
-  userId    String
-  courseId  String
-  title     String
-  order     Int
+  id           String    @id @default(cuid())
+  courseId     String
+  instructorId String
+  title        String
+  category     String
+  description  String
+  thumbnailUrl String
+  tags         String[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-
+  level     AcademyClassLevel
+  instructor  User       @relation(fields: [instructorId], references: [id],onDelete: Cascade)
   course    AcademyCourse   @relation(fields: [courseId], references: [id],onDelete: Cascade)
-  user      User        @relation(fields: [userId], references: [id],onDelete: Cascade)
-  videos    AcademyCourseVideo[]
+  media     AcademyCourseVideo[]
 }
 
 model AcademyCourseVideo {
   id        String   @id @default(cuid())
-  userId    String
   sectionId String
+  instructorId String
   title     String
   url       String
-  order     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  level     AcademyClassLevel
+  type      MediaTypeCourse 
+  instructor  User       @relation(fields: [instructorId], references: [id],onDelete: Cascade)
   section   AcademyCourseSection @relation(fields: [sectionId], references: [id],onDelete: Cascade)
-  user      User        @relation(fields: [userId], references: [id],onDelete: Cascade)
-}
+ }
 
 enum AcademyClassLevel {
   BEGINNER
@@ -1356,24 +1913,86 @@ enum AcademyClassLevel {
   ADVANCED
 }
 
-
-
 model Comment {
   id        String      @id @default(cuid())
   userId    String
-  productId String
+  postId    String
   content   String
+  type      PostType
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  subComment SubComment[]
+  likeComment LikeComment[]
+  dislikeComment DislikeComment[]
+  post      Post     @relation(fields: [postId], references: [id])
   User      User     @relation(fields: [userId], references: [id])
+}
+
+model SubComment {
+  id        String      @id @default(cuid())
+  userId    String
+  commentId String
+  content   String
+  type      PostType
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  LikeSubComment LikeSubComment[]
+  DislikeSubComment DislikeSubComment[]
+  Comment   Comment           @relation(fields: [commentId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model LikeComment {
+  id        String       @id @default(cuid())
+  userId    String
+  commentId    String
+  type      PostType
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Comment   Comment     @relation(fields: [commentId], references: [id])
+  User      User      @relation(fields: [userId], references: [id])
+}
+
+model DislikeComment {
+  id        String      @id @default(cuid())
+  userId    String
+  commentId    String
+  type      PostType
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Comment   Comment     @relation(fields: [commentId], references: [id])
+  User      User      @relation(fields: [userId], references: [id])
+}
+
+model LikeSubComment {
+  id        String       @id @default(cuid())
+  userId    String
+  subCommentId    String
+  type      PostType
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  subComment SubComment     @relation(fields: [subCommentId], references: [id])
+  User      User      @relation(fields: [userId], references: [id])
+}
+
+model DislikeSubComment {
+  id        String      @id @default(cuid())
+  userId    String
+  subCommentId    String
+  type      PostType
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  subComment      SubComment     @relation(fields: [subCommentId], references: [id])
+  User      User      @relation(fields: [userId], references: [id])
 }
 
 model Profile {
   id        String         @id @default(cuid())
   userId    String        @unique
-  photoUrl  String
-  bannerUrl String
+  photoUrl  String?
+  bannerUrl String?
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   followers Follower[]
@@ -1404,18 +2023,22 @@ model Feedback {
 model Like {
   id        String       @id @default(cuid())
   userId    String
-  productId String
+  postId    String
+  type      PostType
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  post      Post     @relation(fields: [postId], references: [id])
   User      User      @relation(fields: [userId], references: [id])
 }
 
 model Dislike {
   id        String      @id @default(cuid())
   userId    String
-  productId String
+  postId    String
+  type      PostType
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  post      Post     @relation(fields: [postId], references: [id])
   User      User      @relation(fields: [userId], references: [id])
 }
 
@@ -1458,105 +2081,44 @@ model FriendRequest {
 model Admin {
   id          String             @id @default(cuid())
   userId      String              @unique
+  fullName    String
+  email       String   @unique
+  country     String
+  state       String
+  area        String
+  address     String?
+  password    String
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   isAdmin     Boolean           @default(false)
   User        User              @relation(fields: [userId], references: [id])
-  AdminAction AdminAction[]
-  Employees   AdminToEmployee[]
-}
-
-model AdminRegistration {
-  id        String      @id @default(cuid())
-  fullName  String
-  email     String   @unique
-  country   String
-  state     String
-  area      String
-  address   String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Employee {
   id             String               @id @default(cuid())
   userId         String              @unique
+  fullName       String
+  email          String   @unique
+  country        String
+  state          String
+  area           String
+  address        String?
+  password       String
   createdAt      DateTime          @default(now())
   updatedAt      DateTime          @updatedAt
   access         Json
   isEmployee     Boolean           @default(false)
-  AdminToEmloyee AdminToEmployee[]
   User           User              @relation(fields: [userId], references: [id])
-  EmployeeAction EmployeeAction[]
 }
 
-model EmployeeRegistration {
-  id        String      @id @default(cuid())
-  fullName  String
-  email     String   @unique
-  country   String
-  state     String
-  area      String
-  address   String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum MediaTypeCourse {
+  VIDEO
+  PDF
+  QUIZ
+  OTHER
 }
 
-model AdminToEmployee {
-  id         String     @id @default(cuid())
-  adminId    String
-  employeeId String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  Admin      Admin    @relation(fields: [adminId], references: [id])
-  Employee   Employee @relation(fields: [employeeId], references: [id])
-}
-
-model AdminAction {
-  id        String      @id @default(cuid())
-  adminId   String
-  action    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  admin     Admin    @relation(fields: [adminId], references: [id])
-}
-
-model EmployeeAction {
-  id         String      @id @default(cuid())
-  employeeId String
-  action     String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  employee   Employee @relation(fields: [employeeId], references: [id])
-}
-
-enum GroupMediaType {
-  SHORT_VIDEO
-  NORMAL_VIDEO
-  IMAGE
-  AUDIO
-  DOCUMENT
-}
-
-enum ClassMediaType {
-  SHORT_VIDEO
-  NORMAL_VIDEO
-  IMAGE
-  AUDIO
-  DOCUMENT
-}
-
-enum BootcampClassMediaType {
-  SHORT_VIDEO
-  NORMAL_VIDEO
-  IMAGE
-  AUDIO
-  DOCUMENT
-}
-
-enum AcademyClassMediaType {
+enum MediaType {
   SHORT_VIDEO
   NORMAL_VIDEO
   IMAGE
@@ -1570,73 +2132,8 @@ enum ChatMessageType {
   VIDEO
   AUDIO
   DOCUMENT
+  RECORDING
 }
-
-enum GroupChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-enum ProgramChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-enum LectureChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-enum BootcampLectureChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-
-enum AcademyLectureChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-enum ClassChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-enum BootcampClassChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
-enum AcademyClassChatMessageType {
-  TEXT
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-}
-
 
 enum FriendshipStatus {
   PENDING

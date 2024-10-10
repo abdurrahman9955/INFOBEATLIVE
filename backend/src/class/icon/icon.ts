@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import ClassService from './createIcon'; 
 
 class ClassController {
-  async updateIcon(req: Request, res: Response) {
+
+  async createClass(req: Request, res: Response) {
     try {
-      const { groupId } = req.params;
+      const { name, description } = req.body;
       const iconFile = req.file?.buffer;
       const mimeType = req.file?.mimetype;
 
@@ -12,7 +13,33 @@ class ClassController {
         return res.status(400).json({ error: 'No file uploaded' });
       }
 
-      const iconUrl = await ClassService.updateClassIcon(groupId, iconFile, mimeType);
+      if (!name || !description) {
+        return res.status(400).json({ error: 'Name and description are required' });
+      }
+
+      const newClass = await ClassService.createClass(name, description, iconFile, mimeType);
+      return res.status(201).json(newClass);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(500).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: 'An unexpected error occurred' });
+      }
+    }
+  }
+
+
+  async updateIcon(req: Request, res: Response) {
+    try {
+      const { classId } = req.params;
+      const iconFile = req.file?.buffer;
+      const mimeType = req.file?.mimetype;
+
+      if (!iconFile || !mimeType) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      const iconUrl = await ClassService.updateClassIcon(classId, iconFile, mimeType);
       return res.status(200).json({ iconUrl });
     } catch (error) {
       if (error instanceof Error) {
@@ -25,9 +52,9 @@ class ClassController {
 
   async deleteIcon(req: Request, res: Response) {
     try {
-      const { groupId } = req.params;
+      const { classId } = req.params;
 
-      await ClassService.deleteClassIcon(groupId);
+      await ClassService.deleteClassIcon(classId);
       return res.status(204).send();
     } catch (error) {
       
@@ -41,9 +68,9 @@ class ClassController {
 
   async getIcon(req: Request, res: Response) {
     try {
-      const { groupId } = req.params;
+      const { classId } = req.params;
 
-      const iconUrl = await ClassService.getClassIcon(groupId);
+      const iconUrl = await ClassService.getClassIcon(classId);
       if (!iconUrl) {
         return res.status(404).json({ error: 'Icon not found' });
       }

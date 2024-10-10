@@ -77,14 +77,7 @@ const AdvanceClassHome = () => {
        thanks so much for your contribution to the community.</p>
 
         </h1></div>
-      
-      
-      <div className='flex justify-center'>
-         <input type='text' className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-11 p-1 mt-5 
-         border-2 border-slate-950  text-lg  bg-white rounded-lg
-           '
-         placeholder='your class title'  />
-      </div>
+   
 
       <div className='flex justify-center'>
          <input type='text' className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-8 p-1 mt-5 
@@ -92,41 +85,12 @@ const AdvanceClassHome = () => {
           '
          placeholder='your class name'  />
       </div>
-      
 
       <div className='flex justify-center'>
-         <input type="text" className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-8 p-1 mt-5
-           border-2 border-slate-950 text-sm   bg-white rounded-lg
-          '
-         placeholder='your profession'  />
-      </div>
-
-      <div className='flex justify-center'>
-         <input type="text" className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-8 p-1 mt-5
-           border-2 border-slate-950 text-sm   bg-white rounded-lg
-          '
-         placeholder='what you specialize in'  />
-      </div>
-
-      <div className='flex justify-center'>
-         <input type="text" className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-8 p-2 mt-5
-           border-2 border-slate-950 text-sm  bg-white rounded-lg
-          '
-         placeholder='your experience'  />
-      </div>
-
-      <div className='flex justify-center'>
-         <input type="text" className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-8 p-1 mt-5
-           border-2 border-slate-950 text-sm   bg-white rounded-lg
-          '
-         placeholder='your qualification'  />
-      </div>
-
-      <div className='flex justify-center'>
-         <button className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-auto  mt-5
-          border-2 border-slate-950  text-sm bg-white rounded-sm
-          '
-         >  <Select4 /> </button>
+         <input type='text' className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-10 p-1 mt-5 
+         border-2 border-slate-950  text-sm  bg-white rounded-lg
+           '
+         placeholder='your class purpose'  />
       </div>
 
       <div className='flex justify-center'>
@@ -134,21 +98,6 @@ const AdvanceClassHome = () => {
            border-2 border-slate-950 text-sm      bg-white rounded-xl
           '
          placeholder='purpose of your class '  />
-      </div>
-
-
-      <div className='flex justify-center'>
-         <textarea className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-40 p-1 mt-5
-           border-2 border-slate-950 text-sm   bg-white rounded-xl
-          '
-         placeholder='what your student will learn'  />
-      </div>
-
-      <div className='flex justify-center'>
-         <textarea className='lg:w-2/5 max-lg:w-2/4 max-sm:w-full m-2 h-40 p-2 mt-5
-           border-2 border-slate-950 text-sm     bg-white rounded-xl
-          '
-         placeholder='write how your class can be useful  '  />
       </div>
 
       <div className='flex justify-center'>

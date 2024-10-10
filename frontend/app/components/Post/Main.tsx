@@ -10,7 +10,7 @@ import Photos from "./Photos";
 
 
 const Main = () => {
- 
+
   const [selectedRoute, setSelectedRoute] = useState<string>('Videos');
   const [MenuVisible, setMenuVisible] = useState(false);
   
@@ -27,7 +27,7 @@ const Main = () => {
      
         <div>
             <div className="flex justify-between gap-4 overflow-x-auto overscroll-auto
-             bg-cyan-400 text-xs
+             bg-lime-500 text-xs
              py-1 border-2 border-purple-950  " >
               
             
@@ -91,7 +91,7 @@ const Main = () => {
 
              <Link href={{pathname:'/Posting'}}>
               <button  type='button' className='text-xs text-white h-7 w-32 rounded
-               bg-gray-900  mr-2  pl-5 pr-5 hover:bg-orange-700 max-lg:hidden
+               bg-gray-900  mr-1  pl-5 pr-5 hover:bg-orange-700 max-lg:hidden
               '>NewPosting</button></Link>
 
              

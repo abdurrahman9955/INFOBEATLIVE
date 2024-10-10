@@ -1,9 +1,35 @@
 import { Request, Response } from 'express';
-import GroupService from './createIcon'; // Make sure this import path is correct
+import GroupService from './createIcon'; 
 
-class GroupController {
-  // Update group icon
-  async updateIcon(req: Request, res: Response) {
+class GroupIconController {
+
+  async createGroupIcon(req: Request, res: Response) {
+    try {
+      const { name, description } = req.body;
+      const iconFile = req.file?.buffer;
+      const mimeType = req.file?.mimetype;
+
+      if (!iconFile || !mimeType) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      if (!name || !description) {
+        return res.status(400).json({ error: 'Name and description are required' });
+      }
+
+      const newClass = await GroupService.createGroupIcon(name, description, iconFile, mimeType);
+      return res.status(201).json(newClass);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(500).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: 'An unexpected error occurred' });
+      }
+    }
+  }
+
+
+  async updateGroupIcon(req: Request, res: Response) {
     try {
       const { groupId } = req.params;
       const iconFile = req.file?.buffer;
@@ -16,36 +42,31 @@ class GroupController {
       const iconUrl = await GroupService.updateGroupIcon(groupId, iconFile, mimeType);
       return res.status(200).json({ iconUrl });
     } catch (error) {
-      // Type assertion to check if error is an instance of Error
       if (error instanceof Error) {
         return res.status(500).json({ error: error.message });
       } else {
-        // If error is not an instance of Error, handle it gracefully
         return res.status(500).json({ error: 'An unexpected error occurred' });
       }
     }
   }
 
-  // Delete group icon
-  async deleteIcon(req: Request, res: Response) {
+  async deleteGroupIcon(req: Request, res: Response) {
     try {
       const { groupId } = req.params;
 
       await GroupService.deleteGroupIcon(groupId);
       return res.status(204).send();
     } catch (error) {
-      // Type assertion to check if error is an instance of Error
+      
       if (error instanceof Error) {
         return res.status(500).json({ error: error.message });
       } else {
-        // If error is not an instance of Error, handle it gracefully
         return res.status(500).json({ error: 'An unexpected error occurred' });
       }
     }
   }
 
-  // Get group icon
-  async getIcon(req: Request, res: Response) {
+  async getGroupIcon(req: Request, res: Response) {
     try {
       const { groupId } = req.params;
 
@@ -56,15 +77,14 @@ class GroupController {
 
       return res.status(200).json({ iconUrl });
     } catch (error) {
-      // Type assertion to check if error is an instance of Error
       if (error instanceof Error) {
         return res.status(500).json({ error: error.message });
       } else {
-        // If error is not an instance of Error, handle it gracefully
+       
         return res.status(500).json({ error: 'An unexpected error occurred' });
       }
     }
   }
 }
 
-export default new GroupController();
+export default new GroupIconController();

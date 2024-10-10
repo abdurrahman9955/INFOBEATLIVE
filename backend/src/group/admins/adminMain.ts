@@ -2,15 +2,15 @@ import { Router } from 'express';
 import GroupAdminController from './admins';
 import { authenticate } from '../createGroup/authMiddleware';
 
-const router = Router();
+const groupAdminRouter = Router();
 
 // Route to add an admin to a group
-router.post('/:groupId/admins/:userId',authenticate, GroupAdminController.addAdmin);
+groupAdminRouter.post('/:groupId/admins/:userId',authenticate, GroupAdminController.addAdmin);
 
 // Route to remove an admin from a group
-router.delete('/:groupId/admins/:userId',authenticate, GroupAdminController.removeAdmin);
+groupAdminRouter.delete('/:groupId/admins/:userId',authenticate, GroupAdminController.removeAdmin);
 
 // Route to get all admins of a group
-router.get('/:groupId/admins',authenticate, GroupAdminController.getAdmins);
+groupAdminRouter.get('/:groupId/admins',authenticate, GroupAdminController.getAdmins);
 
-export default router;
+export default groupAdminRouter;

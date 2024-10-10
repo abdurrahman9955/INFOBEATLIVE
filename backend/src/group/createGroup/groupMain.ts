@@ -3,12 +3,12 @@ import { Router } from 'express';
 import GroupController from './group';
 import { authenticate } from './authMiddleware';
 
-const router = Router();
+const groupRouter = Router();
 
-router.post('/groups',authenticate, GroupController.createGroup);
-router.get('/groups/:id',authenticate, GroupController.getGroupById);
-router.put('/groups/:id',authenticate, GroupController.updateGroup);
-router.delete('/groups/:id',authenticate, GroupController.deleteGroup);
-router.get('/groups', GroupController.getAllGroups);
+groupRouter.post('/groups',authenticate, GroupController.createGroup);
+groupRouter.get('/groups/:id',authenticate, GroupController.getGroupById);
+groupRouter.put('/groups/:id',authenticate, GroupController.updateGroup);
+groupRouter.delete('/groups/:id',authenticate, GroupController.deleteGroup);
+groupRouter.get('/groups', GroupController.getAllGroups);
 
-export default router;
+export default groupRouter;

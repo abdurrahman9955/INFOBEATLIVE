@@ -25,7 +25,7 @@ const Program = () => {
 
         <div className="flex flex-col  ">
         <h1 className="flex justify-center text-xl text-black font-bold max-sm:text-lg  ">
-            create your program here </h1>
+            create your lecture here </h1>
 
             <div className='flex justify-center'>
       <button  onClick={handleClick}

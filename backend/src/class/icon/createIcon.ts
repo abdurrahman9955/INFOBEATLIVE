@@ -1,7 +1,10 @@
-import prisma from './prisma';
+
 import sharp from 'sharp';
 import { uploadImageToS3 } from './s3'; 
 import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION,
@@ -12,19 +15,51 @@ const s3Client = new S3Client({
 });
 
 class ClassService {
-  async updateClassIcon(groupId: string, iconFile: Buffer, mimeType: string): Promise<string> {
+
+  async createClass(name: string, description: string, iconFile: Buffer, mimeType: string): Promise<any> {
+    try {
+      // Process the image (resize, etc.) before uploading
+      const processedImage = await sharp(iconFile)
+        .resize(800) // Resize to 800px wide
+        .toBuffer();
+
+      // Generate a unique key for the S3 object
+      const iconKey = `class-icons/${Date.now()}`;
+
+      // Upload the image to S3
+      const iconUrl = await uploadImageToS3(processedImage, iconKey, mimeType);
+
+      // Create a new class with the icon URL
+      const newClass = await prisma.class.create({
+        data: {
+          icon: iconUrl,
+        },
+      });
+
+      return newClass;
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to create class: ${error.message}`);
+      } else {
+        throw new Error('Failed to create class: An unexpected error occurred');
+      }
+    }
+  }
+ 
+  
+  async updateClassIcon(classId: string, iconFile: Buffer, mimeType: string): Promise<string> {
     try {
       
       const processedImage = await sharp(iconFile)
         .resize(800) 
         .toBuffer();
 
-      const iconKey = `group-icons/${groupId}/${Date.now()}`;
+      const iconKey = `group-icons/${classId}/${Date.now()}`;
 
       const iconUrl = await uploadImageToS3(processedImage, iconKey, mimeType);
 
-      const updatedGroup = await prisma.group.update({
-        where: { id: groupId },
+      const updatedGroup = await prisma.class.update({
+        where: { id: classId },
         data: { icon: iconUrl },
       });
 
@@ -39,19 +74,19 @@ class ClassService {
     }
   }
 
-  async deleteClassIcon(groupId: string): Promise<void> {
+  async deleteClassIcon(classId: string): Promise<void> {
     try {
      
-      const group = await prisma.group.findUnique({
-        where: { id: groupId },
+      const classes = await prisma.class.findUnique({
+        where: { id: classId },
         select: { icon: true },
       });
 
-      if (!group || !group.icon) {
+      if (!classes || !classes.icon) {
         throw new Error('No icon found for this group');
       }
 
-      const iconKey = group.icon.split('/').slice(-2).join('/');
+      const iconKey = classes.icon.split('/').slice(-2).join('/');
 
       const deleteCommand = new DeleteObjectCommand({
         Bucket: process.env.S3_BUCKET_NAME!,
@@ -59,8 +94,8 @@ class ClassService {
       });
       await s3Client.send(deleteCommand);
 
-      await prisma.group.update({
-        where: { id: groupId },
+      await prisma.class.update({
+        where: { id: classId },
         data: { icon: null },
       });
     } catch (error) {
@@ -72,14 +107,14 @@ class ClassService {
     }
   }
 
-  async getClassIcon(groupId: string): Promise<string | null> {
+  async getClassIcon(classId: string): Promise<string | null> {
     try {
-      const group = await prisma.group.findUnique({
-        where: { id: groupId },
+      const classes = await prisma.class.findUnique({
+        where: { id: classId },
         select: { icon: true },
       });
 
-      return group?.icon || null;
+      return classes?.icon || null;
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(`Failed to get group icon: ${error.message}`);

@@ -1,18 +1,15 @@
-// src/routes/groupRoutes.ts
+
 import { Router } from 'express';
-import GroupController from './icon';
-import upload from './multer';
-import { authenticate } from '../createGroup/authMiddleware';
+import GroupIconController from './icon';
+import { upload } from './multer';
+import { authenticate } from '../../group/createGroup/authMiddleware';
 
-const router = Router();
+const groupIconRouter = Router();
 
-// Route to update group icon
-router.post('/:groupId/icon',authenticate, upload.single('icon'), GroupController.updateIcon);
+groupIconRouter.post('/:classId/icon',authenticate, upload.single('icon'), GroupIconController.updateGroupIcon);
 
-// Route to delete group icon
-router.delete('/:groupId/icon',authenticate, GroupController.deleteIcon);
+groupIconRouter.delete('/:classId/icon',authenticate, GroupIconController.deleteGroupIcon);
 
-// Route to get group icon
-router.get('/:groupId/icon',authenticate, GroupController.getIcon);
+groupIconRouter.get('/:classId/icon',authenticate, GroupIconController.getGroupIcon);
 
-export default router;
+export default groupIconRouter;

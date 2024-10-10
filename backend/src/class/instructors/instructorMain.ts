@@ -1,14 +1,16 @@
 import { Router } from 'express';
-import InstructorController from './instructors';
-import { authenticate } from '../../group/createGroup/authMiddleware';
+import ClassInstructorController from './instructors';
+import { authenticate } from '../../account/authenticate/authenticate';
 
-const router = Router();
+const classInstructorsRouter = Router();
 
+// Route to add an Instructor to a class
+classInstructorsRouter.post('/:classId/instructors/:userId',authenticate, ClassInstructorController.addInstructor);
 
-router.post('/:classId/instructors/:userId',authenticate, InstructorController.addInstructor);
+// Route to remove an Instructor from a class
+classInstructorsRouter.delete('/:classId/instructor/:userId',authenticate, ClassInstructorController.removeInstructor);
 
-router.delete('/:classId/instructors/:userId',authenticate, InstructorController.removeInstructor);
+// Route to get all Instructor of a class
+classInstructorsRouter.get('/:classId/instructors',authenticate, ClassInstructorController.getInstructors);
 
-router.get('/:classId/instructors',authenticate, InstructorController.getInstructors);
-
-export default router;
+export default classInstructorsRouter;

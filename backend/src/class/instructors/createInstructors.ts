@@ -2,16 +2,16 @@ import prisma from './prisma';
 import { Prisma } from '@prisma/client';
 
 class ClassInstructorService {
-  async addInstructors(userId: string, classId: string) {
+  async addInstructor(userId: string, classId: string) {
     try {
-      const existingAdmin = await prisma.groupAdmin.findUnique({
+      const existingInstructor = await prisma.instructor.findUnique({
         where: { userId_classId: { userId, classId } },
       });
-      if (existingAdmin) {
-        throw new Error('User is already an admin of this group');
+      if (existingInstructor) {
+        throw new Error('User is already an Instructor of this group');
       }
 
-      return prisma.groupAdmin.create({
+      return prisma.instructor.create({
         data: {
           userId,
           classId,
@@ -21,22 +21,24 @@ class ClassInstructorService {
       if (error instanceof Error) {
         throw new Error(`Failed to add admin: ${error.message}`);
       } else {
-        throw new Error('Failed to add admin: An unknown error occurred');
+        throw new Error('Failed to add Instructor: An unknown error occurred');
       }
     }
   }
-
+  
   async removeInstructor(userId: string, classId: string) {
     try {
-      const admin = await prisma.groupAdmin.findUnique({
-        where: { userId_classId: { userId, classId } },
+      const instructor = await prisma.instructor.findUnique({
+        where: { userId_classId: { userId, classId },
+       },
       });
-      if (!admin) {
+      if (!instructor) {
         throw new Error('User is not an Instructor of this group');
       }
 
-      return prisma.groupAdmin.delete({
-        where: { id: admin.id },
+      return prisma.instructor.delete({
+        where: { id: instructor.id,
+         },
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -49,15 +51,16 @@ class ClassInstructorService {
 
   async getInstructors(classId: string) {
     try {
-      return prisma.groupAdmin.findMany({
-        where: { classId },
+      return prisma.instructor.findMany({
+        where: { classId,
+         },
         include: { user: true },
       });
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to get admins: ${error.message}`);
+        throw new Error(`Failed to get Instructors: ${error.message}`);
       } else {
-        throw new Error('Failed to get admins: An unknown error occurred');
+        throw new Error('Failed to get Instructors: An unknown error occurred');
       }
     }
   }
